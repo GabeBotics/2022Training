@@ -159,10 +159,24 @@ public class Spark {
         for (DcMotor x : special) x.setPower(pace);
     }
 
-    public void mechanumMov(double x, double y, double turn, boolean lateralPriority){
+    // Prioritizes turning over lateral movement when both are happening at the same time
+    public void mechanumMovT(double x, double y, double turn){
         double angle = Math.atan2(y,x); //Finds direction joystick is pointing
         double magnitude = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)); //Pythagorean Theorem
-        if (lateralPriority) { // Prioritizes lateral movement over turning when both are happening at the same time
+            //front right and back left motors
+        double turnFactor = 1-Math.abs(turn);
+        motor2.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor* magnitude - turn);
+        motor3.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude + turn);
+
+        //front left and back right motors
+        motor1.setPower(Math.sin(angle + 0.25 * Math.PI) * turnFactor * magnitude + turn);
+        motor4.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude - turn);
+
+    }
+    // Prioritizes lateral movement over turning when both are happening at the same time
+    public void mechanumMovL(double x, double y, double turn){
+        double angle = Math.atan2(y,x); //Finds direction joystick is pointing
+        double magnitude = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)); //Pythagorean Theorem
             //front right and back left motors
             double lateralFactor = 1-magnitude;
             motor2.setPower(Math.sin(angle - 0.25 * Math.PI) * magnitude - turn * lateralFactor);
@@ -171,16 +185,7 @@ public class Spark {
             //front left and back right motors
             motor1.setPower(Math.sin(angle + 0.25 * Math.PI) * magnitude + turn * lateralFactor);
             motor4.setPower(Math.sin(angle - 0.25 * Math.PI) * magnitude - turn * lateralFactor);
-        } else { // Prioritizes turning movement over lateral when both are happening at the same time
-            //front right and back left motors
-            double turnFactor = 1-Math.abs(turn);
-            motor2.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor* magnitude - turn);
-            motor3.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude + turn);
 
-            //front left and back right motors
-            motor1.setPower(Math.sin(angle + 0.25 * Math.PI) * turnFactor * magnitude + turn);
-            motor4.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude - turn);
-        }
     }
 
     public double getRed(){
@@ -212,6 +217,13 @@ public class Spark {
                     finished = true;
                 }
             }
+        }
+    }
+    public void resetDriveEncoders(){
+        for (DcMotor x : forward) {
+            x.setPower(0);
+            x.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
     }
 
@@ -251,7 +263,7 @@ public class Spark {
             x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
     }
-    public void moveRightFT(int ticks) {
+    public void moveRightFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
         this.rest();
         for(DcMotor x: special){
@@ -262,14 +274,14 @@ public class Spark {
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(ticks);
         }
-        this.moveRight(0.5);
+        this.moveRight(speed);
         waitForMotors();
         for (DcMotor x : forward) {
             x.setPower(0);
             x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
     }
-    public void moveLeftFT(int ticks) {
+    public void moveLeftFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
         this.rest();
         for(DcMotor x: special){
@@ -280,7 +292,7 @@ public class Spark {
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
         }
-        this.moveLeft(0.5);
+        this.moveLeft(speed);
         waitForMotors();
         for (DcMotor x : forward) {
             x.setPower(0);

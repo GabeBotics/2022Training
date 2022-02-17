@@ -40,7 +40,7 @@ public class Tele extends OpMode {
 
 
             //This is the code used to run the movement for Tank drivetrain.
-            robot.mechanumMov(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, false);
+            robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
         }
     }
 }

@@ -103,7 +103,7 @@ public class Wayfinder implements Runnable {
 
     public void run(){
         addTelemetry();
-        while(opmode.opModeIsActive()){
+        while(opmode.opModeIsActive() && !opmode.isStopRequested()){
             getLocation();
             telem.update();
         }
