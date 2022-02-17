@@ -211,7 +211,7 @@ public class Spark {
         boolean finished = false;
         while (auton.opModeIsActive() & !finished) {
             for (DcMotor x : forward) {
-                if (x.getCurrentPosition() > x.getTargetPosition() + 10 || x.getCurrentPosition() < x.getTargetPosition() - 10) {
+                if (x.getCurrentPosition() >= x.getTargetPosition() + 2 || x.getCurrentPosition() <= x.getTargetPosition() - 2) {
                     continue;
                 } else {
                     finished = true;
