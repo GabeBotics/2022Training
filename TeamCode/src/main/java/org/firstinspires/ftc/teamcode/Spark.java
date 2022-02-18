@@ -163,7 +163,7 @@ public class Spark {
     public void mechanumMovT(double x, double y, double turn){
         double angle = Math.atan2(y,x); //Finds direction joystick is pointing
         double magnitude = Math.sqrt(Math.pow(x,2)+Math.pow(y,2)); //Pythagorean Theorem
-            //front right and back left motors
+        //front right and back left motors
         double turnFactor = 1-Math.abs(turn);
         motor2.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor* magnitude - turn);
         motor3.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude + turn);
@@ -171,7 +171,6 @@ public class Spark {
         //front left and back right motors
         motor1.setPower(Math.sin(angle + 0.25 * Math.PI) * turnFactor * magnitude + turn);
         motor4.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude - turn);
-
     }
     // Prioritizes lateral movement over turning when both are happening at the same time
     public void mechanumMovL(double x, double y, double turn){
@@ -238,7 +237,7 @@ public class Spark {
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
         }
-        this.turnRight(0.5);
+        this.turnRight(speed);
         waitForMotors();
         for (DcMotor x : forward) {
             x.setPower(0);
@@ -256,7 +255,7 @@ public class Spark {
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(ticks);
         }
-        this.turnLeft(0.5);
+        this.turnLeft(speed);
         waitForMotors();
         for (DcMotor x : forward) {
             x.setPower(0);

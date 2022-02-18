@@ -157,7 +157,6 @@ public class Wayfinder implements Runnable {
                 break;
             }
         }
-
         // Provide feedback as to where the robot is located (if we know).
         if (targetVisible) {
 
