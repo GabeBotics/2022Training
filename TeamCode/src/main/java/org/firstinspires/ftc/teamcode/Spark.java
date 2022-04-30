@@ -170,7 +170,7 @@ public class Spark {
 
         //front left and back right motors
         motor1.setPower(Math.sin(angle + 0.25 * Math.PI) * turnFactor * magnitude + turn);
-        motor4.setPower(Math.sin(angle - 0.25 * Math.PI) * turnFactor * magnitude - turn);
+        motor4.setPower(Math.sin(angle + 0.25 * Math.PI) * turnFactor * magnitude - turn);
     }
     // Prioritizes lateral movement over turning when both are happening at the same time
     public void mechanumMovL(double x, double y, double turn){
@@ -183,7 +183,7 @@ public class Spark {
 
             //front left and back right motors
             motor1.setPower(Math.sin(angle + 0.25 * Math.PI) * magnitude + turn * lateralFactor);
-            motor4.setPower(Math.sin(angle - 0.25 * Math.PI) * magnitude - turn * lateralFactor);
+            motor4.setPower(Math.sin(angle + 0.25 * Math.PI) * magnitude - turn * lateralFactor);
 
     }
 
