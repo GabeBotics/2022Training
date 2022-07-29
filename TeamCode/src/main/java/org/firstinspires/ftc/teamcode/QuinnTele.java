@@ -25,8 +25,9 @@ public class QuinnTele extends OpMode {
         //In the gap below would normally be where you would create if statements for buttons
         if (gamepad1.x) {
             robot.armMotor.setPower(1);
-        } else robot.armMotor.setPower(0);
-
+        }
+        if (gamepad1.b) {
+            robot.armMotor.setPower(-1);
         }
 
         //MOVEMENT
