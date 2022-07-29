@@ -31,7 +31,7 @@ public class Auton extends LinearOpMode {
         finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
-       // Example:
+       // Example
         // robot.moveForwardFT(1000, 0.5);
 
 
