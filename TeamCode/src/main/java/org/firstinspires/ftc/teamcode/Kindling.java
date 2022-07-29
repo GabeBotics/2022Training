@@ -94,7 +94,7 @@ public class Kindling extends LinearOpMode {
 
         waitForStart();
 
-        /* Note: To use the remote camera preview:
+        /* Note: To use the remote camera preview
          * AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
          * Tap the preview window to receive a fresh image.
          * It is not permitted to transition to RUN while the camera preview window is active.
