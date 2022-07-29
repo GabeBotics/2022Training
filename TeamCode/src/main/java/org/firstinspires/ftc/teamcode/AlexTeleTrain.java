@@ -22,17 +22,12 @@ public class AlexTeleTrain extends OpMode {
     public void loop() {
 
 
-    if (gamepad1.left_bumper) {
-    robot.carouselMotor.setPower(-1);
+if (gamepad1.left_bumper) {
+        robot.carouselMotor.setPower(-1);
 
-    if (gamepad1.right_bumper) {
-    robot.carouselMotor.setPower(1);
-}
-    else{if (gamepad1.atRest()){
-    robot.rest();
+}else if (gamepad1.right_bumper) {
+        robot.carouselMotor.setPower(1);
 
-}
-}
-}
+}else   robot.carouselMotor.setPower(0);
 }
 }
