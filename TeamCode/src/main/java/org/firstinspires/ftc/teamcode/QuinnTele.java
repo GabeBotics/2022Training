@@ -26,9 +26,10 @@ public class QuinnTele extends OpMode {
         if (gamepad1.x) {
             robot.armMotor.setPower(1);
         }
-        if (gamepad1.b) {
+        else if (gamepad1.b) {
             robot.armMotor.setPower(-1);
         }
+        else robot.armMotor.setPower(0);
 
         //MOVEMENT
         //First, we want to make the robot rest if the gamepad is not being touched
