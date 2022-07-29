@@ -38,7 +38,7 @@ public class RyanTeleop extends OpMode {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
 
 
-            //This is the code used to run the movement for Tank drivetrain.
+            //This is the code used to run the movement for Mechanum or Tank drivetrain.
            robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
                 if (gamepad1.left_stick_x > 0.5) {
