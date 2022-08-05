@@ -61,11 +61,11 @@ public class RyanAutonTest extends LinearOpMode {
                 robot.moveForwardFT(400, 0.5);
                     sleep(500);
                 robot.turnLeftFT(600, 0.5);
-                    sleep(500)
+                    sleep(500);
                 robot.moveForwardFT(400, 0.5);
                     sleep(500);
                 robot.turnLeftFT(600, 0.5);
-                    sleep(500)
+                    sleep(500);
                 robot.moveForwardFT(400, 0.5);
 
             }
