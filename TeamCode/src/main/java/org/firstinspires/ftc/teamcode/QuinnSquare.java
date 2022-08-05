@@ -32,6 +32,34 @@ public class QuinnSquare extends LinearOpMode {
         //Any code that goes in this space is only run once, and after it is finished the program ends.
         robot.moveForwardFT(600,0.5);
         sleep(100);
+        robot.turnLeftFT(4334,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
+        robot.turnLeftFT(4334,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
+        robot.turnLeftFT(4334,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
+        robot.turnLeftFT(1300,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
+        robot.turnLeftFT(1300,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
+        robot.turnLeftFT(1300,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
+        robot.turnLeftFT(1300,0.5);
+        sleep(100);
+        robot.moveForwardFT(600,0.5);
+        sleep(100);
         robot.turnLeftFT(866,0.5);
         sleep(100);
         robot.moveForwardFT(600,0.5);
@@ -44,19 +72,15 @@ public class QuinnSquare extends LinearOpMode {
         sleep(100);
         robot.moveForwardFT(600,0.5);
         sleep(100);
-        robot.turnLeftFT(1300,0.5);
+        robot.turnLeftFT(866,0.5);
         sleep(100);
         robot.moveForwardFT(600,0.5);
         sleep(100);
-        robot.turnLeftFT(1300,0.5);
+        robot.turnLeftFT(866,0.5);
         sleep(100);
         robot.moveForwardFT(600,0.5);
         sleep(100);
-        robot.turnLeftFT(1300,0.5);
-        sleep(100);
-        robot.moveForwardFT(600,0.5);
-        sleep(100);
-        robot.turnLeftFT(1300,0.5);
+        robot.turnLeftFT(866,0.5);
        // Example
         // robot.moveForwardFT(1000, 0.5);
 
