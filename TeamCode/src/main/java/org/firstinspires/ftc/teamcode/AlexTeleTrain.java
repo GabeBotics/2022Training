@@ -14,14 +14,13 @@ public class AlexTeleTrain extends OpMode {
     @Override
     public void init() {
 
-        //This code initializes the drivetrain. Make sure that you have the right drivetrain selected!
         robot = new Spark(this, Spark.Drivetrain.TANK);
     }
 
     @Override
     public void loop() {
 
-
+/*
 if (gamepad1.left_bumper) {
         robot.carouselMotor.setPower(-1);
 
@@ -29,5 +28,18 @@ if (gamepad1.left_bumper) {
         robot.carouselMotor.setPower(1);
 
 }else   robot.carouselMotor.setPower(0);
-}
-}
+*/
+        if (gamepad1.right_stick_x > 0.5) {
+            robot.moveRight(0.5);
+
+        if (gamepad1.right_stick_y > 0.5) {
+            robot.moveForward(0.5);
+
+
+
+
+        if (gamepad1.left_stick_x > 0.5) {
+            robot.turnLeft(0.5);
+
+
+                            }}}}}
