@@ -1,17 +1,17 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
-
 
 @Autonomous(name="Auton", group="Template")
 @Disabled
 
-public class Auton extends LinearOpMode {
+public class EthanTriangle2 extends LinearOpMode {
     private Spark robot;
     private Wayfinder finder;
     private ElapsedTime runtime = new ElapsedTime();
@@ -33,6 +33,20 @@ public class Auton extends LinearOpMode {
 
        // Example:
         // robot.moveForwardFT(1000, 0.5);
+
+        sleep(200);
+        robot.turnRightFT(600, 0.5);
+        sleep(200);
+        robot.moveForwardFT(500, 0.5);
+        sleep(200);
+        robot.turnLeftFT(600, 0.5);
+        sleep(200);
+        robot.moveBackwardFT(500, 0.5);
+        sleep(200);
+        robot.turnLeftFT(600, 0.5);
+        sleep(200);
+        robot.moveForwardFT(500, .5);
+        sleep(200);
 
 
 

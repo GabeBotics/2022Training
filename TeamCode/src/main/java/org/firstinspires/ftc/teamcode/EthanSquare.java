@@ -34,6 +34,15 @@ public class Auton extends LinearOpMode {
        // Example:
         // robot.moveForwardFT(1000, 0.5);
 
+        sleep(200);
+        robot.moveForwardFT(500, 0.5);
+        sleep(200);
+        robot.moveLeftFT(500, 0.5);
+        sleep(200);
+        robot.moveBackwardFT(500, 0.5);
+        sleep(200);
+        robot.moveRightFT(500, 0.5);
+        sleep(200);
 
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
