@@ -35,29 +35,38 @@ public class Auton extends LinearOpMode {
         robot.armServo.setPosition(0.50);
         sleep(100);
         robot.armServo.setPosition(0);
-        
+        sleep(100);
+        robot.clawServo.setPosition(1);
+        sleep(100);
+        robot.clawServo.setPosition(0);
        // Example:
         // robot.moveForwardFT(1000, 0.5);
 
     
 
-        //Inside of the while statement below is any code that you want to run in loop during autonomous.
-        while (opModeIsActive() && runtime.milliseconds() < 30000) {
-            robot.clawServo.setPosition(1);
+        //Inside of the while statement below is any code that you want to run in loop during autonomoul.
 
 
-    }
-}
-        
-       // // // // //  //ryan's play area
+  
+
+ while (opModeIsActive() && runtime.milliseconds() < 30000) {
 
 
-            if (gamepad1.a) {
-                robot.clawServo.setPosition(1);
+    robot.clawServo.setPosition(1);
+    robot.sleep(100);
+    robot.clawServo.setPosition(0);
+    robot.sleep(100);
 
-            if (gamepad1.x);
-                robot.clawServo.setPosition(0);
-            }
-        
-    
+
+    robot.clawServo.setPosition(0);
+    robot.sleep(100);
+    robot.clawServo.setPosition(0.5);
+    robot.sleep(100);
+    robot.clawServo.setPosition(1);
+    robot.sleep(100);
+    robot.clawServo.setPosition(0.5);
+    robot.sleep(100);
+    robot.clawServo.setPosition(0);
+    robot.sleep(100);
+ }
 
