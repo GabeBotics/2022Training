@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
 import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 
@@ -29,32 +30,84 @@ public class Auton extends LinearOpMode {
         finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
+        int R = 250; //(rest for 250 milliseconds)
+        int T = 1300; //(90 degree turn)
+        int M = 20; //(1 cm)
+            
 
-        //robot going from A2 to the middle of B3 and B4
-        
-        robot.moveLeftFT(/*2ft*/);
-        robot.rest(500);
-        robot.moveForwardFT(/*3ft*/);
-        robot.rest(500);
-        robot.turnLeftFT(/*90 degrees*/);
-        robot.rest(500);
+        //robot code for bottom left and top right   
+        robot.moveLeftFT(M*60, 0.5);
+        robot.rest(R);
+        robot.moveForwardFT(M*90, 0.5);
+        robot.rest(R);
+        robot.turnRightFT(T*3);
+        robot.rest(R);
         //robot places a cone on the high junction   
-        robot.rest(500); 
-        robot.moveLeftFT(/*3ft*/);      
-        robot.rest(500);
-        robot.turnLeftFT(/*90 degrees*/);
-        //robot pick up cone
-            for (int i = 0; i < 2; i++){
+       
+        for (int a = 0; a < 2; a++) {
+               
+            robot.moveRightFT(M*90);       
+            robot.rest(R);
+            robot.turnLeftFT(T/2);
+            
+            //robot picks up cone
 
-        robot.turnLeftFT(/*180 degrees*/);
-        robot.moveForwardFT(/*3ft*/);
-        robot.turnRightFT(/*90 degrees*/);
-        //robot places cone on high junction
+            robot.turnLeftFT(T*1.5);
+            robot.rest(R);
+            robot.moveRightFT(M*90);
 
+            //robot places cone on medium junction
+        
+            robot.moveLeftFT(M*90);
+            robot.rest(R);
+            robot.turnRightFT(T*1.5);
+
+            //robot picks up cone
+
+            robot.turnRightFT(T/2);
+            robot.rest(R);
+            robot.moveLeftFT(M*90);
+
+            //robot places cone on high junction
+
+            
+        
         }
+        //robot code for top left and bottom right
+        robot.moveRightFT(M*60, 0.5);
+        robot.rest(R);
+        robot.moveForwardFT(M*90, 0.5);
+        robot.rest(R);
+        robot.turnLeftFT(T*3);
+        robot.rest(R);
+        //robot places a cone on the high junction   
+       
+        for (int b = 0; b < 2; b++) {
+               
+            robot.moveLeftFT(M*90);       
+            robot.rest(R);
+            robot.turnRightFT(T/2);
+            
+            //robot picks up cone
+
+            robot.turnRightFT(T*1.5);
+            robot.rest(R);
+            robot.moveLeftFT(M*90);
+
+            //robot places cone on medium junction
         
-        
-        
+            robot.moveRightFT(M*90);
+            robot.rest(R);
+            robot.turnLeftFT(T*1.5);
+
+            //robot picks up cone
+
+            robot.turnLeftFT(T/2);
+            robot.rest(R);
+            robot.moveRightFT(M*90);  
+
+            //robot places cone on high junction
+    
 
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
@@ -64,7 +117,5 @@ public class Auton extends LinearOpMode {
     
 
         }
-
-    
     }
 }
