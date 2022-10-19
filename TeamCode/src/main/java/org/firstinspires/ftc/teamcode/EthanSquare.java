@@ -9,7 +9,7 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 
 @Autonomous(name="Auton", group="Template")
-@Disabled 
+@Disabled
 
 public class Auton extends LinearOpMode {
     private Spark robot;
@@ -21,6 +21,8 @@ public class Auton extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         runtime.reset();
         telemetry.update();
+        //Code Above the waitForStart() is where you define variables or initialize any Vuforia
+        //DO NOT PUT MOVEMENT CODE HERE - YOU WILL BE PENALIZED
         Wayfinder finder = new Wayfinder(this, Wayfinder.CameraPlacement.FRONT, robot);
 
         finder.initVuforia();
@@ -29,42 +31,26 @@ public class Auton extends LinearOpMode {
         finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
+       // Example:
+        // robot.moveForwardFT(1000, 0.5);
 
-        //robot going from A2 to the middle of B3 and B4
-        
-        robot.moveLeftFT(/*2ft*/);
-        robot.rest(500);
-        robot.moveForwardFT(/*3ft*/);
-        robot.rest(500);
-        robot.turnLeftFT(/*90 degrees*/);
-        robot.rest(500);
-        //robot places a cone on the high junction   
-        robot.rest(500); 
-        robot.moveLeftFT(/*3ft*/);      
-        robot.rest(500);
-        robot.turnLeftFT(/*90 degrees*/);
-        //robot pick up cone
-            for (int i = 0; i < 2; i++){
-
-        robot.turnLeftFT(/*180 degrees*/);
-        robot.moveForwardFT(/*3ft*/);
-        robot.turnRightFT(/*90 degrees*/);
-        //robot places cone on high junction
-
-        }
-        
-        
-        
+        sleep(200);
+        robot.moveForwardFT(500, 0.5);
+        sleep(200);
+        robot.moveLeftFT(500, 0.5);
+        sleep(200);
+        robot.moveBackwardFT(500, 0.5);
+        sleep(200);
+        robot.moveRightFT(500, 0.5);
+        sleep(200);
 
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
         while (opModeIsActive() && runtime.milliseconds() < 30000) {
 
-         
-    
 
         }
 
-    
+
     }
 }
