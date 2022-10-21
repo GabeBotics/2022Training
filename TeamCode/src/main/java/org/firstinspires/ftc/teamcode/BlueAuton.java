@@ -30,15 +30,17 @@ public class Auton extends LinearOpMode {
         finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
+
+
         int R = 250; //(rest for 250 milliseconds)
         int T = 1300; //(90 degree turn)
         int M = 20; //(1 cm)
             
 
         //robot code for bottom left and top right   
-        robot.moveLeftFT(M*60, 0.5);
+        robot.moveRightFT(M*60, 0.5);
         robot.rest(R);
-        robot.moveForwardFT(M*90, 0.5);
+        robot.moveBackwardFT(M*90, 0.5);
         robot.rest(R);
         robot.turnRightFT(T*3);
         robot.rest(R);
@@ -46,7 +48,7 @@ public class Auton extends LinearOpMode {
        
         for (int a = 0; a < 2; a++) {
                
-            robot.moveRightFT(M*90);       
+            robot.moveLeftFT(M*90);       
             robot.rest(R);
             robot.turnLeftFT(T/2);
             
@@ -73,49 +75,13 @@ public class Auton extends LinearOpMode {
             
         
         }
-        //robot code for top left and bottom right
-        robot.moveRightFT(M*60, 0.5);
-        robot.rest(R);
-        robot.moveForwardFT(M*90, 0.5);
-        robot.rest(R);
-        robot.turnLeftFT(T*3);
-        robot.rest(R);
-        //robot places a cone on the high junction   
-       
-        for (int b = 0; b < 2; b++) {
-               
-            robot.moveLeftFT(M*90);       
-            robot.rest(R);
-            robot.turnRightFT(T/2);
-            
-            //robot picks up cone
-
-            robot.turnRightFT(T*1.5);
-            robot.rest(R);
-            robot.moveLeftFT(M*90);
-
-            //robot places cone on medium junction
         
-            robot.moveRightFT(M*90);
-            robot.rest(R);
-            robot.turnLeftFT(T*1.5);
-
-            //robot picks up cone
-
-            robot.turnLeftFT(T/2);
-            robot.rest(R);
-            robot.moveRightFT(M*90);  
-
-            //robot places cone on high junction
-    
-
-
-        //Inside of the while statement below is any code that you want to run in loop during autonomous.
-        while (opModeIsActive() && runtime.milliseconds() < 30000) {
+            //Inside of the while statement below is any code that you want to run in loop during autonomous.
+            while (opModeIsActive() && runtime.milliseconds() < 30000) {
 
          
     
 
+            }
         }
     }
-}

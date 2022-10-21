@@ -68,5 +68,5 @@ public class Auton extends LinearOpMode {
     robot.sleep(100);
     robot.clawServo.setPosition(0);
     robot.sleep(100);
- }
+ }}}
 
