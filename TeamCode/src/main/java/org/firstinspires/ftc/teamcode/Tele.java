@@ -97,45 +97,45 @@ public class Tele extends OpMode {
 
             // the arm moves up
             if (gamepad2.left_stick_y > 0.2) {
-              armMotor(leftY2);
+              //armMotor(leftY2);
             }
             
             // the arm moves down
             if (gamepad2.left_stick_y < -0.2) {
-                armMotor(leftY2);
+                //armMotor(leftY2);
             }
 
             
             // the claw opens
 
-            if (gamepad2.left_trigger) {
-                clawServo(0);
+            if (gamepad2.left_trigger > 0) {
+               // clawServo(0);
             }
 
 
             // the claw closes
 
-            if (gamepad2.right_trigger) {
-                clawServo(180);
+            if (gamepad2.right_trigger > 0) {
+               // clawServo(180);
             }
            //reset 
             if (gamepad2.x) {
-             armMotor();//reset
+           //  armMotor();//reset
             }
 
             //tall junction preset
-            if (gamepad2.x) {
-                armMotor();//however much it needs to go to preset tall junction
+            if (gamepad2.y) {
+               // armMotor();//however much it needs to go to preset tall junction
             }
             
             //medium junction preset
             if (gamepad2.b) {
-                armMotor();//however much it needs to go to preset medium junction
+               // armMotor();//however much it needs to go to preset medium junction
             }
             
             //small junction preset
             if (gamepad2.a) {
-                armMotor();//however much it needs to go to preset small junction
+               // armMotor();//however much it needs to go to preset small junction
             }
 
 
