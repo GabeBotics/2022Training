@@ -20,19 +20,6 @@ public class Tele extends OpMode {
 
     @Override
     public void loop() {
-        //This nested if statement is used to make the robot move using the left joystick.
-        // It works for every drive train, as long as it is set up in Anvil!
-
-
-        //In the gap below would normally be where you would create if statements for buttons
-        
-        
-        
-    
-
-        
-
-
         //MOVEMENT
         //First, we want to make the robot rest if the gamepad is not being touched
 

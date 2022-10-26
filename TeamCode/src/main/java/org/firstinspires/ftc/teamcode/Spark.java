@@ -19,7 +19,7 @@ public class Spark {
     public DcMotor motor1, motor2, motor3, motor4;
     public CRServo crservo1;
     public Servo servo1, clawServo, armServo;
-    public DcMotor carouselMotor, armMotor; //hi lakelan
+    public DcMotor carouselMotor, armMotor;
     public ColorSensor sensorColor;
     public TouchSensor touchSensor;
     private HardwareMap hwMap;
