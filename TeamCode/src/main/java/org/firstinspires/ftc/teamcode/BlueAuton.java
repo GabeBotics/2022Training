@@ -42,7 +42,7 @@ public class Auton extends LinearOpMode {
         robot.rest(R);
         robot.moveBackwardFT(M*90, 0.5);
         robot.rest(R);
-        robot.turnRightFT(T*3);
+        robot.turnRightFT(T);
         robot.rest(R);
         //robot places a cone on the high junction   
        
