@@ -33,7 +33,7 @@ public class Auton extends LinearOpMode {
 
 
         int R = 250; //(rest for 250 milliseconds)
-        int T = 1300; //(90 degree turn)
+        int T = 650; //(90 degree turn)
         int M = 20; //(1 cm)
             
 
@@ -43,7 +43,7 @@ public class Auton extends LinearOpMode {
         sleep(R);
         robot.moveBackwardFT(M*90, 0.5);
         sleep(R);
-        robot.turnLeftFT(T, 0.5);
+        robot.turnLeftFT(T*2, 0.5);
         sleep(R);
         //robot places a cone on the high junction   
        
@@ -51,11 +51,11 @@ public class Auton extends LinearOpMode {
                
             robot.moveRightFT(M*90, 0.5);       
             robot.sleep(R);
-            robot.turnRightFT(T/2, 0.5);
+            robot.turnRightFT(T, 0.5);
             
             //robot picks up cone
 
-            robot.turnRightFT(T*1.5, 0.5);
+            robot.turnRightFT(T*3, 0.5);
             sleep(R);
             robot.moveRightFT(M*90, 0.5);
 
@@ -63,11 +63,11 @@ public class Auton extends LinearOpMode {
         
             robot.moveLeftFT(M*90, 0.5);
             robot.sleep(R);
-            robot.turnLeftFT(T*1.5, 0.5);
+            robot.turnLeftFT(T*3, 0.5);
 
             //robot picks up cone
 
-            robot.turnLeftFT(T/2, 0.5);
+            robot.turnLeftFT(T, 0.5);
             sleep(R);
             robot.moveLeftFT(M*90, 0.5);  
 
