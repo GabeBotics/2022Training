@@ -12,7 +12,7 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 @Autonomous(name="Auton", group="Template")
 @Disabled 
 
-public class Auton extends LinearOpMode {
+public class BlueAuton extends LinearOpMode {
     private Spark robot;
     private Wayfinder finder;
     private ElapsedTime runtime = new ElapsedTime();
