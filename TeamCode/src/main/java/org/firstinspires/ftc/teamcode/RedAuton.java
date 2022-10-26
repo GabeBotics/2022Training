@@ -33,7 +33,7 @@ public class Auton extends LinearOpMode {
 
 
         int R = 250; //(rest for 250 milliseconds)
-        int T = 650; //(90 degree turn)
+        int T = 650; //(45 degree turn)
         int M = 20; //(1 cm)
             
 

@@ -33,7 +33,7 @@ public class Auton extends LinearOpMode {
 
 
         int R = 250; //(sleep for 250 milliseconds)
-        int T = 1300; //(90 degree turn)
+        int T = 650; //(45 degree turn)
         int M = 20; //(1 cm)
             
 
@@ -50,11 +50,11 @@ public class Auton extends LinearOpMode {
                
             robot.moveLeftFT(M*90, 0.5);       
             sleep(R);
-            robot.turnLeftFT(T/2, 0.5);
+            robot.turnLeftFT(T, 0.5);
             
             //robot picks up cone
 
-            robot.turnLeftFT(T*1.5, 0.5);
+            robot.turnLeftFT(T*3, 0.5);
             sleep(R);
             robot.moveRightFT(M*90, 0.5);
 
@@ -62,11 +62,11 @@ public class Auton extends LinearOpMode {
         
             robot.moveLeftFT(M*90, 0.5);
             sleep(R);
-            robot.turnRightFT(T*1.5, 0.5);
+            robot.turnRightFT(T*3, 0.5);
 
             //robot picks up cone
 
-            robot.turnRightFT(T/2, 0.5);
+            robot.turnRightFT(T*3, 0.5);
             sleep(R);
             robot.moveLeftFT(M*90, 0.5);
 
@@ -75,7 +75,7 @@ public class Auton extends LinearOpMode {
         
             //Inside of the while statement below is any code that you want to run in loop during autonomous.
             while (opModeIsActive() && runtime.milliseconds() < 30000) {
-                
+
             }
         }
     }
