@@ -33,7 +33,7 @@ public class Tele extends OpMode {
                 
             double leftY = gamepad1.left_stick_y;
             double leftX = gamepad1.left_stick_x;
-            Double rightY = gamepad1.right_stick_y;
+            double rightY = gamepad1.right_stick_y;
             double rightX = gamepad1.right_stick_x;
             
             
