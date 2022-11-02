@@ -84,26 +84,26 @@ public class Tele extends OpMode {
 
             // the arm moves up
             if (gamepad2.left_stick_y > 0.2) {
-              //armMotor(leftY2);
+              robot.armMotor(leftY2);
             }
             
             // the arm moves down
             if (gamepad2.left_stick_y < -0.2) {
-                //armMotor(leftY2);
+                robot.armMotor(leftY2);
             }
 
             
             // the claw opens
 
             if (gamepad2.left_trigger > 0) {
-               // clawServo(0);
+                robot.clawServo(0);
             }
 
 
             // the claw closes
 
             if (gamepad2.right_trigger > 0) {
-               // clawServo(180);
+                robot.clawServo(180);
             }
            //reset 
             if (gamepad2.x) {
@@ -129,3 +129,11 @@ public class Tele extends OpMode {
         }
     }
 }
+
+
+
+
+
+
+
+
