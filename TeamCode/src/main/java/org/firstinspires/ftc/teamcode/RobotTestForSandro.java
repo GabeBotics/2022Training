@@ -11,7 +11,7 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 @Autonomous(name="RobotTestForSandro", group="Template")
 @Disabled
 
-public class Auton extends LinearOpMode {
+public class RobotTestForSandro extends LinearOpMode {
     private Spark robot;
     private Wayfinder finder;
     private ElapsedTime runtime = new ElapsedTime();
@@ -53,20 +53,22 @@ public class Auton extends LinearOpMode {
 
 
     robot.clawServo.setPosition(1);
-    robot.sleep(100);
+    sleep(100);
     robot.clawServo.setPosition(0);
-    robot.sleep(100);
+    sleep(100);
 
 
     robot.clawServo.setPosition(0);
-    robot.sleep(100);
+    sleep(100);
     robot.clawServo.setPosition(0.5);
-    robot.sleep(100);
+    sleep(100);
     robot.clawServo.setPosition(1);
-    robot.sleep(100);
+    sleep(100);
     robot.clawServo.setPosition(0.5);
-    robot.sleep(100);
+    sleep(100);
     robot.clawServo.setPosition(0);
-    robot.sleep(100);
- }}}
+    sleep(100);
+        }
+    }
+}
 

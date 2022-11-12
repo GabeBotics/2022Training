@@ -5,9 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="Tele", group="Template")
+@TeleOp(name="GroupTeleop", group="Template")
 //@Disabled
-public class Tele extends OpMode {
+public class GroupTeleop extends OpMode {
 
     private Spark robot;
 

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 
-@Autonomous(name="Auton", group="Template")
+@Autonomous(name="RedAuton", group="Template")
 @Disabled 
 
 public class RedAuton extends LinearOpMode {
@@ -50,7 +50,7 @@ public class RedAuton extends LinearOpMode {
         for (int b = 0; b < 2; b++) {
                
             robot.moveRightFT(M*90, 0.5);       
-            robot.sleep(R);
+            sleep(R);
             robot.turnRightFT(T, 0.5);
             
             //robot picks up cone
@@ -62,7 +62,7 @@ public class RedAuton extends LinearOpMode {
             //robot places cone on medium junction
         
             robot.moveLeftFT(M*90, 0.5);
-            robot.sleep(R);
+            sleep(R);
             robot.turnLeftFT(T*3, 0.5);
 
             //robot picks up cone
