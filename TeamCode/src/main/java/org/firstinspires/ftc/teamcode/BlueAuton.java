@@ -14,7 +14,6 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 public class BlueAuton extends LinearOpMode {
     private Spark robot;
-    private Wayfinder finder;
     private ElapsedTime runtime = new ElapsedTime();
     @Override
     public void runOpMode() {
@@ -22,55 +21,58 @@ public class BlueAuton extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         runtime.reset();
         telemetry.update();
-        Wayfinder finder = new Wayfinder(this, Wayfinder.CameraPlacement.FRONT, robot);
-
-        finder.initVuforia();
 
         waitForStart(); //Below this point is where you place the linear code for your autonomous.
-        finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
 
 
-        int R = 250; //(sleep for 250 milliseconds)
-        int T = 650; //(45 degree turn)
-        int M = 20; //(1 cm)
+        int R = 250; //sleep for 250 milliseconds
+        int T = 650; //45 degree turn
+        int M = 20; //1 cm
             
-
         //robot code for bottom left and top right   
+        
         robot.moveRightFT(M*60, 0.5);
         sleep(R);
         robot.moveBackwardFT(M*90, 0.5);
         sleep(R);
         robot.turnRightFT(T, 0.5);
         sleep(R);
-        //robot places a cone on the high junction   
+       //robot moves its arm to hig joycon
+        robot.armUpFT(180, 0.5);
        
         for (int a = 0; a < 2; a++) {
                
+            //robot moves to get cone
             robot.moveLeftFT(M*90, 0.5);       
             sleep(R);
             robot.turnLeftFT(T, 0.5);
+            sleep(R);
+            //claw open
+            robot.clawServo(0);
             
-            //robot picks up cone
-
             robot.turnLeftFT(T*3, 0.5);
             sleep(R);
             robot.moveRightFT(M*90, 0.5);
-
-            //robot places cone on medium junction
+            //robot move medium juncti
+            robot.armUpFT(145, 0.5);
         
+            //
             robot.moveLeftFT(M*90, 0.5);
             sleep(R);
             robot.turnRightFT(T*3, 0.5);
-
-            //robot picks up cone
+            //claw open
+            robot.clawServo(0);
 
             robot.turnRightFT(T*3, 0.5);
             sleep(R);
             robot.moveLeftFT(M*90, 0.5);
 
-            //robot places cone on high junction
+            //high junction
+            robot.armUpFT(180, 0.5);
+            //claw close
+            robot.clawServo(180);
         }
         
             //Inside of the while statement below is any code that you want to run in loop during autonomous.

@@ -45,33 +45,35 @@ public class RedAuton extends LinearOpMode {
         sleep(R);
         robot.turnLeftFT(T*2, 0.5);
         sleep(R);
-        //robot places a cone on the high junction   
+        robot.armUpFT(180, 0.5);
        
         for (int b = 0; b < 2; b++) {
                
             robot.moveRightFT(M*90, 0.5);       
             sleep(R);
             robot.turnRightFT(T, 0.5);
-            
-            //robot picks up cone
+            sleep(R);
+            robot.clawServo(0);
 
             robot.turnRightFT(T*3, 0.5);
             sleep(R);
             robot.moveRightFT(M*90, 0.5);
-
-            //robot places cone on medium junction
+            sleep(R);
+            robot.armUpFT(145, 0.5);
+            sleep(R);
+            robot.clawServo(180);
         
             robot.moveLeftFT(M*90, 0.5);
             sleep(R);
             robot.turnLeftFT(T*3, 0.5);
 
-            //robot picks up cone
+            robot.clawServo(180);
 
             robot.turnLeftFT(T, 0.5);
             sleep(R);
             robot.moveLeftFT(M*90, 0.5);  
 
-            //robot places cone on high junction
+            robot.armUpFT(180, 0.5);
     
 
 
@@ -82,3 +84,4 @@ public class RedAuton extends LinearOpMode {
         }
     }
 }
+//insert funny word here: balls

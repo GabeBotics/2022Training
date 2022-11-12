@@ -67,17 +67,20 @@ public class Spark {
                 motor2 = hwMap.dcMotor.get("motor2");
                 motor3 = hwMap.dcMotor.get("motor3");
                 motor4 = hwMap.dcMotor.get("motor4");
+                armMotor = hwMap.dcMotor.get("armMotor");
                 //Set motor directions;
                 motor1.setDirection(DcMotor.Direction.FORWARD);
                 motor2.setDirection(DcMotor.Direction.REVERSE);
                 motor3.setDirection(DcMotor.Direction.FORWARD);
                 motor4.setDirection(DcMotor.Direction.REVERSE);
+                armMotor.setDirection(DcMotor.Direction.FORWARD);
                 //Set motor purposes
                 forward = new DcMotor[]{motor1, motor2, motor3, motor4, carouselMotor};
                 right = new DcMotor[]{motor2, motor4};
                 left = new DcMotor[]{motor1, motor3};
                 special = new DcMotor[]{motor1, motor4};
                 unique = new DcMotor[]{motor2, motor3};
+                arm = new DcMotor[]{armMotor};
                 break;
             case TANK:
                 motor1 = hwMap.dcMotor.get("motor1");
@@ -157,6 +160,14 @@ public class Spark {
     public void moveLeft(double pace) {
         for (DcMotor x : unique) x.setPower(-pace);
         for (DcMotor x : special) x.setPower(pace);
+    }
+
+    public void armUp(double pace) {
+        for (DcMotor x : arm) x.setPower(pace);
+    }
+
+    public void armDown(double pace) {
+        for (DcMotor x : arm) x.setPower(-pace);
     }
 
     // Prioritizes turning over lateral movement when both are happening at the same time
@@ -325,6 +336,22 @@ public class Spark {
         for (DcMotor x : forward) {
             x.setPower(0);
             x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
+    }
+    public void armUpFT(int ticks, double speed) {
+        //Blocks until the robot has gotten to the desired location.
+        this.rest();
+        for(DcMotor x: armMotor){
+            x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            x.setTargetPosition(ticks);
+        }
+    }
+    public void armDownFT(int ticks, double speed) {
+        //Blocks until the robot has gotten to the desired location.
+        this.rest();
+        for(DcMotor x: armMotor){
+            x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            x.setTargetPosition(-ticks);
         }
     }
 }
