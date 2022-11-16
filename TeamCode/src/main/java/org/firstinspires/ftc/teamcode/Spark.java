@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -26,6 +27,7 @@ public class Spark {
     LinearOpMode auton;
     OpMode tele;
     public Drivetrain drive;
+    DigitalChannel armTouch;
 
     public Telemetry telemetry;
 
@@ -80,7 +82,6 @@ public class Spark {
                 left = new DcMotor[]{motor1, motor3};
                 special = new DcMotor[]{motor1, motor4};
                 unique = new DcMotor[]{motor2, motor3};
-                arm = new DcMotor[]{armMotor};
                 break;
             case TANK:
                 motor1 = hwMap.dcMotor.get("motor1");
@@ -97,6 +98,10 @@ public class Spark {
                 motor2 = hwMap.dcMotor.get("motor2");
                 motor3 = hwMap.dcMotor.get("motor3");
                 motor4 = hwMap.dcMotor.get("motor4");
+                armMotor = hwMap.dcMotor.get("armMotor");
+                armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                armTouch = hwMap.get(DigitalChannel.class, "armTouch");
+                armTouch.setMode(DigitalChannel.Mode.INPUT);
                 //Set directions to ensure that robot moves forward when
                 //all motor power is 1
                 motor1.setDirection(DcMotor.Direction.REVERSE);
@@ -162,13 +167,13 @@ public class Spark {
         for (DcMotor x : special) x.setPower(pace);
     }
 
-    public void armUp(double pace) {
-        for (DcMotor x : arm) x.setPower(pace);
-    }
+    public void armUp(double pace) { armMotor.setPower(pace); }
 
     public void armDown(double pace) {
-        for (DcMotor x : arm) x.setPower(-pace);
+        armMotor.setPower(-pace);
     }
+
+    public boolean armIsDown() { return armTouch.getState(); }
 
     // Prioritizes turning over lateral movement when both are happening at the same time
     public void mechanumMovT(double x, double y, double turn){
@@ -341,17 +346,13 @@ public class Spark {
     public void armUpFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
         this.rest();
-        for(DcMotor x: armMotor){
-            x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            x.setTargetPosition(ticks);
-        }
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setTargetPosition(ticks);
     }
     public void armDownFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
         this.rest();
-        for(DcMotor x: armMotor){
-            x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            x.setTargetPosition(-ticks);
-        }
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setTargetPosition(-ticks);
     }
 }

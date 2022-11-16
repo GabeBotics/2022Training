@@ -53,7 +53,7 @@ public class RedAuton extends LinearOpMode {
             sleep(R);
             robot.turnRightFT(T, 0.5);
             sleep(R);
-            robot.clawServo(0);
+            //robot.clawServo(0);
 
             robot.turnRightFT(T*3, 0.5);
             sleep(R);
@@ -61,13 +61,13 @@ public class RedAuton extends LinearOpMode {
             sleep(R);
             robot.armUpFT(145, 0.5);
             sleep(R);
-            robot.clawServo(180);
+            //robot.clawServo(180);
         
             robot.moveLeftFT(M*90, 0.5);
             sleep(R);
             robot.turnLeftFT(T*3, 0.5);
 
-            robot.clawServo(180);
+            //robot.clawServo(180);
 
             robot.turnLeftFT(T, 0.5);
             sleep(R);

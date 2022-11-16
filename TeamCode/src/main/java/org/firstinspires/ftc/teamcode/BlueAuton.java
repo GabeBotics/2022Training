@@ -50,7 +50,7 @@ public class BlueAuton extends LinearOpMode {
             robot.turnLeftFT(T, 0.5);
             sleep(R);
             //claw open
-            robot.clawServo(0);
+            //robot.clawServo(0);
             
             robot.turnLeftFT(T*3, 0.5);
             sleep(R);
@@ -63,7 +63,7 @@ public class BlueAuton extends LinearOpMode {
             sleep(R);
             robot.turnRightFT(T*3, 0.5);
             //claw open
-            robot.clawServo(0);
+            //robot.clawServo(0);
 
             robot.turnRightFT(T*3, 0.5);
             sleep(R);
@@ -72,7 +72,7 @@ public class BlueAuton extends LinearOpMode {
             //high junction
             robot.armUpFT(180, 0.5);
             //claw close
-            robot.clawServo(180);
+            //robot.clawServo(180);
         }
         
             //Inside of the while statement below is any code that you want to run in loop during autonomous.
