@@ -14,7 +14,7 @@ public class Tele extends OpMode {
     @Override
     public void init() {
 
-        //This code initializes the drivetrain. Make sure that you have the right drivetrain selected!
+        //This code initializes the drivetrain. Make sure that you have the right drivetrain selected
         robot = new Spark(this, Spark.Drivetrain.MECHANUM);
     }
 
