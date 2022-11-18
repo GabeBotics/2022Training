@@ -33,11 +33,11 @@ public class Tele extends OpMode {
 
             //Arm code
             if (gamepad2.left_stick_y > 0.1) {
-                robot.armMotor.setPower(gamepad2.left_stick_y);
+                robot.armMotor.setPower(-gamepad2.left_stick_y);
             } else if (gamepad2.left_stick_y < -0.1) {
-                robot.armMotor.setPower(gamepad2.left_stick_y);
+                robot.armMotor.setPower(-gamepad2.left_stick_y);
             } else {
-                robot.armMotor.setPower(0);
+                robot.armMotor.setPower(0.1);
             }
 
             //Claw code
