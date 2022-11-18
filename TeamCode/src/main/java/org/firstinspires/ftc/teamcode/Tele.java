@@ -29,34 +29,24 @@ public class Tele extends OpMode {
         else {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
             //GAMEPAD 1 CODE
-            robot.mechanumMovL(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+            robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
             //Arm code
             if (gamepad2.left_stick_y > 0.1) {
-                robot.armMotor.setPower(-gamepad2.left_stick_y);
+                robot.armUp(0.5);
             } else if (gamepad2.left_stick_y < -0.1) {
-                robot.armMotor.setPower(-gamepad2.left_stick_y);
+                robot.armDown(0.5);
             } else {
-                robot.armMotor.setPower(0.1);
+                robot.armMotor.setPower(0);
             }
 
             //Claw code
             if (gamepad2.left_trigger > 0.1) {
-               robot.clawServo.setPosition(0);
+                robot.clawServo.setPosition(0);
             }
-            if (gamepad2.right_trigger > 0.1) {
-                robot.clawServo.setPosition(1);
+            if (gamepad2.right_trigger > 0) {
+                robot.clawServo.setPosition(0.7);
             }
-            if (gamepad2.x) {
-                robot.clawServo.setPosition(0.5);
-            }
-            if (gamepad2.y) {
-                robot.clawServo.setPosition(0.25);
-            }
-            if (gamepad2.a) {
-                robot.clawServo.setPosition(0.75);
-            }
-
             /*reset
             if (gamepad2.x) {
                 //armMotor();//reset

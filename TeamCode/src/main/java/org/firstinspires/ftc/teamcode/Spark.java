@@ -98,6 +98,7 @@ public class Spark {
                 motor2 = hwMap.dcMotor.get("motor2");
                 motor3 = hwMap.dcMotor.get("motor3");
                 motor4 = hwMap.dcMotor.get("motor4");
+                clawServo = hwMap.servo.get("clawServo");
                 armMotor = hwMap.dcMotor.get("armMotor");
                 armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                 armTouch = hwMap.get(DigitalChannel.class, "armTouch");
