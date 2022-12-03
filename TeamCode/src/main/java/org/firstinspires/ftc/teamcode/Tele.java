@@ -23,7 +23,8 @@ public class Tele extends OpMode {
         //MOVEMENT
         //First, we want to make the robot rest if the gamepad is not being touched
 
-
+        telemetry.addData("ArmTouch: ", robot.armIsDown());
+        telemetry.update();
         //If the gamepad is NOT at rest, then we want to see what we need to do.
         if (gamepad1.atRest() && gamepad2.atRest()) robot.rest();
         else {
@@ -32,20 +33,20 @@ public class Tele extends OpMode {
             robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
             //Arm code
-            if (gamepad2.left_stick_y > 0.1) {
+            if (gamepad2.left_stick_y > 0.3) {
                 robot.armUp(0.5);
-            } else if (gamepad2.left_stick_y < -0.1) {
-                robot.armDown(0.5);
+            } else if (gamepad2.left_stick_y < -0.3) {
+                robot.armDown(0.2);
             } else {
                 robot.armMotor.setPower(0);
             }
 
             //Claw code
             if (gamepad2.left_trigger > 0.1) {
-                robot.clawServo.setPosition(0);
+                robot.clawServo.setPosition(0.08);
             }
             if (gamepad2.right_trigger > 0) {
-                robot.clawServo.setPosition(0.7);
+                robot.clawServo.setPosition(0.15);
             }
             /*reset
             if (gamepad2.x) {

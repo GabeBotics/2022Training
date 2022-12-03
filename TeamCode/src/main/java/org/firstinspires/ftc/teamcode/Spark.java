@@ -100,14 +100,14 @@ public class Spark {
                 motor4 = hwMap.dcMotor.get("motor4");
                 clawServo = hwMap.servo.get("clawServo");
                 armMotor = hwMap.dcMotor.get("armMotor");
-                armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                //armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                 armTouch = hwMap.get(DigitalChannel.class, "armTouch");
                 armTouch.setMode(DigitalChannel.Mode.INPUT);
                 //Set directions to ensure that robot moves forward when
                 //all motor power is 1
-                motor1.setDirection(DcMotor.Direction.REVERSE);
+                motor1.setDirection(DcMotor.Direction.FORWARD);
                 motor2.setDirection(DcMotor.Direction.FORWARD);
-                motor3.setDirection(DcMotor.Direction.REVERSE);
+                motor3.setDirection(DcMotor.Direction.FORWARD);
                 motor4.setDirection(DcMotor.Direction.FORWARD);
                 //Add motors to arrays
                 //forward array contains all motors

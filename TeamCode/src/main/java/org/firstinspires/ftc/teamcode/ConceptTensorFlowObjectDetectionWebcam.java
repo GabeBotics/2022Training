@@ -57,7 +57,8 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
 
     /*
      * Specify the source for the Tensor Flow Model.
-     * If the TensorFlowLite object model is included in the Robot Controller App as an "asset",
+     * If the TensorFlowLite object model is in
+     * cluded in the Robot Controller App as an "asset",
      * the OpMode must to load it using loadModelFromAsset().  However, if a team generated model
      * has been downloaded to the Robot Controller's SD FLASH memory, it must to be loaded using loadModelFromFile()
      * Here we assume it's an Asset.    Also see method initTfod() below .
