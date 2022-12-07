@@ -38,8 +38,8 @@ public class BlueAuton extends LinearOpMode {
         sleep(R);
         robot.turnRightFT(T, 0.5);
         sleep(R);
-        //robot moves its arm to hig joycon
-        robot.armUpFT(180, 0.5);
+        //robot moves its arm to high junction
+        //robot.armUpFT(180, 0.5);
 
         for (int a = 0; a < 2; a++) {
 
@@ -54,8 +54,8 @@ public class BlueAuton extends LinearOpMode {
             robot.turnLeftFT(T * 3, 0.5);
             sleep(R);
             robot.moveRightFT(M * 90, 0.5);
-            //robot move medium juncti
-            robot.armUpFT(145, 0.5);
+            //robot move medium junction
+            //robot.armUpFT(145, 0.5);
 
             //
             robot.moveLeftFT(M * 90, 0.5);
@@ -69,7 +69,7 @@ public class BlueAuton extends LinearOpMode {
             robot.moveLeftFT(M * 90, 0.5);
 
             //high junction
-            robot.armUpFT(180, 0.5);
+            //robot.armUpFT(180, 0.5);
             //claw close
             //robot.clawServo(180);
         }

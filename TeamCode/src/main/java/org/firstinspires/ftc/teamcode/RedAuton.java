@@ -45,7 +45,7 @@ public class RedAuton extends LinearOpMode {
         sleep(R);
         robot.turnLeftFT(T*2, 0.5);
         sleep(R);
-        robot.armUpFT(180, 0.5);
+        //robot.armUpFT(180, 0.5);
        
         for (int b = 0; b < 2; b++) {
                
@@ -59,7 +59,7 @@ public class RedAuton extends LinearOpMode {
             sleep(R);
             robot.moveRightFT(M*90, 0.5);
             sleep(R);
-            robot.armUpFT(145, 0.5);
+            //robot.armUpFT(145, 0.5);
             sleep(R);
             //robot.clawServo(180);
         
@@ -73,7 +73,7 @@ public class RedAuton extends LinearOpMode {
             sleep(R);
             robot.moveLeftFT(M*90, 0.5);  
 
-            robot.armUpFT(180, 0.5);
+            //robot.armUpFT(180, 0.5);
     
 
 
@@ -84,4 +84,3 @@ public class RedAuton extends LinearOpMode {
         }
     }
 }
-//insert funny word here: 
