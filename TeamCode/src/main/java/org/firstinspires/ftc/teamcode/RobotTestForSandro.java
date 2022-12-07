@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 
-@Autonomous(name="Auton", group="Template")
+@Autonomous(name="RobotTestForSandro", group="Template")
 @Disabled
 
-public class Auton extends LinearOpMode {
+public class RobotTestForSandro extends LinearOpMode {
     private Spark robot;
     private Wayfinder finder;
     private ElapsedTime runtime = new ElapsedTime();
@@ -30,18 +30,45 @@ public class Auton extends LinearOpMode {
         waitForStart(); //Below this point is where you place the linear code for your autonomous.
         finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
-
-       // Example
+        
+        
+        robot.armServo.setPosition(0.50);
+        sleep(100);
+        robot.armServo.setPosition(0);
+        sleep(100);
+        robot.clawServo.setPosition(1);
+        sleep(100);
+        robot.clawServo.setPosition(0);
+       // Example:
         // robot.moveForwardFT(1000, 0.5);
 
+    
+
+        //Inside of the while statement below is any code that you want to run in loop during autonomoul.
 
 
-        //Inside of the while statement below is any code that you want to run in loop during autonomous.
-        while (opModeIsActive() && runtime.milliseconds() < 30000) {
+  
+
+ while (opModeIsActive() && runtime.milliseconds() < 30000) {
 
 
+    robot.clawServo.setPosition(1);
+    sleep(100);
+    robot.clawServo.setPosition(0);
+    sleep(100);
+
+
+    robot.clawServo.setPosition(0);
+    sleep(100);
+    robot.clawServo.setPosition(0.5);
+    sleep(100);
+    robot.clawServo.setPosition(1);
+    sleep(100);
+    robot.clawServo.setPosition(0.5);
+    sleep(100);
+    robot.clawServo.setPosition(0);
+    sleep(100);
         }
-
-
     }
 }
+

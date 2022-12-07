@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="Tele", group="Template")
+@TeleOp(name="GroupTeleop", group="Template")
 //@Disabled
-public class QuinnTele extends OpMode {
+public class GroupTeleop extends OpMode {
 
     private Spark robot;
 
@@ -23,9 +25,7 @@ public class QuinnTele extends OpMode {
 
 
         //In the gap below would normally be where you would create if statements for buttons
-        if (gamepad1.x) {
-            robot.armMotor.setPower(1);
-        } else robot.armMotor.setPower(0);
+        if (gamepad1.x){
 
         }
 
@@ -44,3 +44,6 @@ public class QuinnTele extends OpMode {
         }
     }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
