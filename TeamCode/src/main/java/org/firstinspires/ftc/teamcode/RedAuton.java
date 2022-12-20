@@ -32,46 +32,46 @@ public class RedAuton extends LinearOpMode {
 
 
 
-        int R = 250; //(rest for 250 milliseconds)
-        int T = 650; //(45 degree turn)
-        int M = 20; //(1 cm)
+        int restTicks = 250; //(rest for 250 milliseconds)
+        int degTicks = 650; //(45 degree turn)
+        int cmTicks = 20; //(1 cm)
             
 
         
         //robot code for top left and bottom right
-        robot.moveLeftFT(M*60, 0.5);
-        sleep(R);
-        robot.moveBackwardFT(M*90, 0.5);
-        sleep(R);
-        robot.turnLeftFT(T*2, 0.5);
-        sleep(R);
+        robot.moveLeftFT(cmTicks*60, 0.5);
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks*90, 0.5);
+        sleep(restTicks);
+        robot.turnLeftFT(degTicks*2, 0.5);
+        sleep(restTicks);
         robot.armUpFT(180, 0.5);
        
         for (int b = 0; b < 2; b++) {
                
-            robot.moveRightFT(M*90, 0.5);       
-            sleep(R);
-            robot.turnRightFT(T, 0.5);
-            sleep(R);
+            robot.moveRightFT(cmTicks*90, 0.5);       
+            sleep(restTicks);
+            robot.turnRightFT(degTicks, 0.5);
+            sleep(restTicks);
             //robot.clawServo(0);
 
-            robot.turnRightFT(T*3, 0.5);
-            sleep(R);
-            robot.moveRightFT(M*90, 0.5);
-            sleep(R);
+            robot.turnRightFT(degTicks*3, 0.5);
+            sleep(restTicks);
+            robot.moveRightFT(cmTicks*90, 0.5);
+            sleep(restTicks);
             robot.armUpFT(145, 0.5);
-            sleep(R);
+            sleep(restTicks);
             //robot.clawServo(180);
         
-            robot.moveLeftFT(M*90, 0.5);
-            sleep(R);
-            robot.turnLeftFT(T*3, 0.5);
+            robot.moveLeftFT(cmTicks*90, 0.5);
+            sleep(restTicks);
+            robot.turnLeftFT(degTicks*3, 0.5);
 
             //robot.clawServo(180);
 
-            robot.turnLeftFT(T, 0.5);
-            sleep(R);
-            robot.moveLeftFT(M*90, 0.5);  
+            robot.turnLeftFT(degTicks, 0.5);
+            sleep(restTicks);
+            robot.moveLeftFT(cmTicks*90, 0.5);  
 
             robot.armUpFT(180, 0.5);
     
@@ -84,4 +84,3 @@ public class RedAuton extends LinearOpMode {
         }
     }
 }
-//insert funny word here: 
