@@ -46,7 +46,7 @@ public class Tele extends OpMode {
             } else if (gamepad2.left_stick_y < -0.3) {
                 robot.armDown(0.5);
             } else {
-                robot.armMotor.setPower(0.1);
+                robot.armMotor.setPower(0.3);
             }
 
             /*reset
