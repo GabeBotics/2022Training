@@ -19,7 +19,7 @@ public class Spark {
     //Define servo and motor variables
     public DcMotor motor1, motor2, motor3, motor4;
     public CRServo crservo1;
-    public Servo servo1, clawServo, armServo;
+    public Servo clawServo;
     public DcMotor carouselMotor, armMotor;
     public ColorSensor sensorColor;
     public TouchSensor touchSensor;
