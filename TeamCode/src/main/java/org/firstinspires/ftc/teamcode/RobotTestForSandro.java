@@ -32,9 +32,9 @@ public class RobotTestForSandro extends LinearOpMode {
         //Any code that goes in this space is only run once, and after it is finished the program ends.
         
         
-        robot.armServo.setPosition(0.50);
+        //robot.armServo.setPosition(0.50);
         sleep(100);
-        robot.armServo.setPosition(0);
+        //robot.armServo.setPosition(0);
         sleep(100);
         robot.clawServo.setPosition(1);
         sleep(100);
