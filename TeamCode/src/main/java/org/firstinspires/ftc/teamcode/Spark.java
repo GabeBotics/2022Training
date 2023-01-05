@@ -361,13 +361,16 @@ public class Spark {
         armMotor.setTargetPosition(-ticks);
     }
 
+    //0.08 Scissor Position
     public void servoClose() {
-        clawServo.setPosition(0);
+        clawServo.setPosition(0.08);
     }
+
+    //0.15 Starting Position to Pick Up Cone
     public void servoOpen() {
-        clawServo.setPosition(1);
+        clawServo.setPosition(0.15);
     }
     public void servoPrepare() {
-        clawServo.setPosition(0.5);
+        clawServo.setPosition(0.3);
     }
 }

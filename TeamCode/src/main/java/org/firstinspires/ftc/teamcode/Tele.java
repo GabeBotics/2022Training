@@ -38,9 +38,9 @@ public class Tele extends OpMode {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
             //GAMEPAD 1 CODE
             if (gamepad2.left_stick_y < -0.3) {
-                robot.armUp(0.5);
+                robot.armUp(-0.5);
             } else if (gamepad2.left_stick_y > 0.3) {
-                robot.armDown(0.5);
+                robot.armDown(-0.5);
             } else {
                 robot.armStop();
             }
@@ -53,7 +53,6 @@ public class Tele extends OpMode {
 
             robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
-            //Arm code
         }
     }
 }
