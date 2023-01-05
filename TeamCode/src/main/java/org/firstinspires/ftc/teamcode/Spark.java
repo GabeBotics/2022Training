@@ -356,14 +356,13 @@ public class Spark {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         armMotor.setTargetPosition(-ticks);
     }
+
     public void servoClose() {
         clawServo.setPosition(0.5);
     }
-
     public void servoOpen() {
         clawServo.setPosition(1);
     }
-
     public void servoPrepare() {
         clawServo.setPosition(0.7);
     }
