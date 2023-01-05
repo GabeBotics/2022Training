@@ -35,7 +35,9 @@ public class BlueAuton extends LinearOpMode {
         int degTicks = 650; //45 degree turn
 
         //robot code for bottom left and top right   
-
+   
+        //place the robot so that the camera is on the opposite side of the robot from the side closest to the 
+        //wall
         robot.moveRightFT(cmTicks * 60, 0.5);
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 90, 0.5);
@@ -44,24 +46,31 @@ public class BlueAuton extends LinearOpMode {
         sleep(restTicks);
         //robot moves its arm to high junction
         robot.armUpFT(180, 0.5);
+        //open claw to deposit cone
+        robot.clawServo.setPosition(0);
 
         for (int a = 0; a < 2; a++) {
+
+            //claw open
+            robot.clawServo.setPosition(0);
 
             //robot moves to get cone
             robot.moveLeftFT(cmTicks * 90, 0.5);
             sleep(restTicks);
             robot.turnLeftFT(degTicks, 0.5);
             sleep(restTicks);
-            //claw open
-            //robot.clawServo(0);
+            
+            //claw close to grab cone
+            robot.clawServo.setPosition(1);
 
             robot.turnLeftFT(degTicks * 3, 0.5);
             sleep(restTicks);
             robot.moveRightFT(cmTicks * 90, 0.5);
             //robot move medium junction
             robot.armUpFT(145, 0.5);
+            //claw open to release cone
+            robot.clawServo.setPosition(0);
 
-            //
             robot.moveLeftFT(cmTicks * 90, 0.5);
             sleep(restTicks);
             robot.turnRightFT(degTicks * 3, 0.5);
