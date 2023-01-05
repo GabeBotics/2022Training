@@ -35,9 +35,12 @@ public class BlueAuton extends LinearOpMode {
         int degTicks = 650; //45 degree turn
 
         //robot code for bottom left and top right   
-   
         //place the robot so that the camera is on the opposite side of the robot from the side closest to the 
         //wall
+
+        //PLACE IMAGE RECOGNITION CODE HERE
+
+        //robot moves to high junction
         robot.moveRightFT(cmTicks * 60, 0.5);
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 90, 0.5);
@@ -47,45 +50,54 @@ public class BlueAuton extends LinearOpMode {
         //robot moves its arm to high junction
         robot.armUpFT(180, 0.5);
         //open claw to deposit cone
-        robot.clawServo.setPosition(0);
+        robot.servoClose();
 
         for (int a = 0; a < 2; a++) {
-
-            //claw open
-            robot.clawServo.setPosition(0);
-
-            //robot moves to get cone
-            robot.moveLeftFT(cmTicks * 90, 0.5);
-            sleep(restTicks);
-            robot.turnLeftFT(degTicks, 0.5);
-            sleep(restTicks);
             
-            //claw close to grab cone
-            robot.clawServo.setPosition(1);
+            //MEDIUM JUNCTION SECTION
 
-            robot.turnLeftFT(degTicks * 3, 0.5);
-            sleep(restTicks);
-            robot.moveRightFT(cmTicks * 90, 0.5);
-            //robot move medium junction
-            robot.armUpFT(145, 0.5);
-            //claw open to release cone
-            robot.clawServo.setPosition(0);
+                //robot moves to  cone
+                robot.moveLeftFT(cmTicks * 90, 0.5);
+                sleep(restTicks);
+                robot.turnLeftFT(degTicks, 0.5);
+                sleep(restTicks);
+            
+                //claw close to grab cone
+                robot.servoClose();
 
-            robot.moveLeftFT(cmTicks * 90, 0.5);
-            sleep(restTicks);
-            robot.turnRightFT(degTicks * 3, 0.5);
-            //claw open
-            //robot.clawServo(0);
+                //robot moves to medium junction
+                robot.turnLeftFT(degTicks * 3, 0.5);
+                sleep(restTicks);
+                robot.moveRightFT(cmTicks * 90, 0.5);
+            
+                //raises arm to medium junction height
+                robot.armUpFT(145, 0.5);
 
-            robot.turnRightFT(degTicks * 3, 0.5);
-            sleep(restTicks);
-            robot.moveLeftFT(cmTicks * 90, 0.5);
+                //claw open to release cone
+                robot.servoOpen();
 
-            //high junction
-            robot.armUpFT(180, 0.5);
-            //claw close
-            //robot.clawServo(180);
+
+            //TALL JUNCTION SECTION
+                //robot moves to cone
+                robot.moveLeftFT(cmTicks * 90, 0.5);
+                sleep(restTicks);
+                robot.turnRightFT(degTicks * 3, 0.5);
+                
+                //claw close to get cone 
+                robot.servoClose();
+           
+                //Robot moves to high junction
+                robot.turnRightFT(degTicks * 3, 0.5);
+                sleep(restTicks);
+                robot.moveLeftFT(cmTicks * 90, 0.5);
+
+                //arm goes to high junction height
+                robot.armUpFT(180, 0.5);
+                //claw open to deposit cone
+                robot.servoOpen();
         }
+
+        //Park wherever initially indicated by the signal sleeve
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
         while (opModeIsActive() && runtime.milliseconds() < 30000) {
