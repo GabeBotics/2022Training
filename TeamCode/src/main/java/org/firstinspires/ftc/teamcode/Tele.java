@@ -34,10 +34,10 @@ public class Tele extends OpMode {
 
             //Claw code
             if (gamepad2.left_trigger > 0) {
-                robot.clawServo.setPosition(1);
+                robot.servoOpen();
             }
             if (gamepad2.right_trigger > 0) {
-                robot.clawServo.setPosition(0);
+                robot.servoClose();
             }
 
             //Arm code
