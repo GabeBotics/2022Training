@@ -174,6 +174,10 @@ public class Spark {
         armMotor.setPower(-pace);
     }
 
+    public void armStop(){
+        armMotor.setPower(0);
+    }
+
     public boolean armIsDown() { return armTouch.getState(); }
 
     // Prioritizes turning over lateral movement when both are happening at the same time
@@ -358,12 +362,12 @@ public class Spark {
     }
 
     public void servoClose() {
-        clawServo.setPosition(0.5);
+        clawServo.setPosition(0);
     }
     public void servoOpen() {
         clawServo.setPosition(1);
     }
     public void servoPrepare() {
-        clawServo.setPosition(0.7);
+        clawServo.setPosition(0.5);
     }
 }
