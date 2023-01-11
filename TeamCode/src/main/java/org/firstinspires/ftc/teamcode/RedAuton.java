@@ -10,7 +10,7 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 
 @Autonomous(name="RedAuton", group="Template")
-@Disabled 
+//@Disabled
 
 public class RedAuton extends LinearOpMode {
     private Spark robot;

@@ -51,6 +51,10 @@ public class Tele extends OpMode {
                 robot.servoClose();
             }
 
+            if (gamepad2.right_stick_x > 0.8) {
+                robot.servoPrepare();
+            }
+
             robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         }

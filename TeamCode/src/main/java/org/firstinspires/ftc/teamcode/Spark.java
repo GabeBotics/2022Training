@@ -370,6 +370,7 @@ public class Spark {
     public void servoOpen() {
         clawServo.setPosition(0.15);
     }
+
     public void servoPrepare() {
         clawServo.setPosition(0.3);
     }

@@ -14,7 +14,7 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 
 @Autonomous(name="BlueAuton", group="Template")
-@Disabled 
+//@Disabled
 
 public class BlueAuton extends LinearOpMode {
     private Spark robot;
@@ -101,6 +101,13 @@ public class BlueAuton extends LinearOpMode {
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
         while (opModeIsActive() && runtime.milliseconds() < 30000) {
+            telemetry.addData("motor1", robot.motor1.getCurrentPosition());
+            telemetry.addData("motor2", robot.motor2.getCurrentPosition());
+            telemetry.addData("motor3", robot.motor3.getCurrentPosition());
+            telemetry.addData("motor4", robot.motor4.getCurrentPosition());
+            telemetry.update();
+
+
 
         }
     }
