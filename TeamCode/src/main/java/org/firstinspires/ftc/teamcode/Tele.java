@@ -23,65 +23,39 @@ public class Tele extends OpMode {
         //MOVEMENT
         //First, we want to make the robot rest if the gamepad is not being touched
 
-
+       // telemetry.addData("ArmTouch: ", robot.armIsDown());
+       // telemetry.update();
         //If the gamepad is NOT at rest, then we want to see what we need to do.
+        telemetry.addData("armMotor", robot.armMotor.getPower());
+        telemetry.addData("servo", robot.clawServo.getPosition());
+        telemetry.addData("right_trigger", gamepad2.right_trigger);
+        telemetry.addData("left_trigger", gamepad2.left_trigger);
+        telemetry.addData("left stick y", gamepad2.left_stick_y);
+        telemetry.update();
+
         if (gamepad1.atRest() && gamepad2.atRest()) robot.rest();
         else {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
             //GAMEPAD 1 CODE
-            robot.mechanumMovL(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
-
-            //Arm code
-            if (gamepad2.left_stick_y > 0.1) {
-                robot.armMotor.setPower(-gamepad2.left_stick_y);
-            } else if (gamepad2.left_stick_y < -0.1) {
-                robot.armMotor.setPower(-gamepad2.left_stick_y);
+            if (gamepad2.left_stick_y < -0.3) {
+                robot.armUp(-0.5);
+            } else if (gamepad2.left_stick_y > 0.3) {
+                robot.armDown(-0.5);
             } else {
-                robot.armMotor.setPower(0.1);
+                robot.armStop();
             }
 
-            //Claw code
-            if (gamepad2.left_trigger > 0.1) {
-               robot.clawServo.setPosition(0);
-            }
-            if (gamepad2.right_trigger > 0.1) {
-                robot.clawServo.setPosition(1);
-            }
-            if (gamepad2.x) {
-                robot.clawServo.setPosition(0.5);
-            }
-            if (gamepad2.y) {
-                robot.clawServo.setPosition(0.25);
-            }
-            if (gamepad2.a) {
-                robot.clawServo.setPosition(0.75);
+            if (gamepad2.left_trigger > 0.2) {
+                robot.servoOpen();
+            } else if (gamepad2.right_trigger > 0.2) {
+                robot.servoClose();
             }
 
-            /*reset
-            if (gamepad2.x) {
-                //armMotor();//reset
-                robot.armUpFT(80, 0.5);
-                robot.armDownFT(80, 0.5);
+            if (gamepad2.right_stick_x > 0.8) {
+                robot.servoPrepare();
             }
 
-            //tall junction preset
-            if (gamepad2.y) {
-                robot.armUpFT(180, 0.5);
-            }
-            
-            //medium junction preset
-            if (gamepad2.b) {
-               robot.armUpFT(145, 0.5);
-               robot.rest(250);
-               robot.armDownFT(245, 0.5);
-            }
-            
-            //small junction preset
-            if (gamepad2.a) {
-                robot.armDownFT(245, 0.5);
-                robot.rest(250);
-                robot.armUpFT(100, 0.5);
-            }*/
+            robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         }
     }

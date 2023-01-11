@@ -26,7 +26,6 @@ public class Wayfinder implements Runnable {
 
     LinearOpMode opmode;
     HardwareMap hardwareMap;
-    Spark.Drivetrain drivetrain;
     Spark robot;
     Telemetry telem;
 
