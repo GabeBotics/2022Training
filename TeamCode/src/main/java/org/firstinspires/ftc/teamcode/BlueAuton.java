@@ -23,7 +23,7 @@ public class BlueAuton extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot = new Spark(this, MECHANUM);
-        tracker = new Tracker(this, Tracker.CameraPlacement.FRONT, robot);
+        tracker = new Tracker(this, robot);
         telemetry.addData("Status", "Initialized");
         runtime.reset();
         telemetry.update();
@@ -51,21 +51,42 @@ public class BlueAuton extends LinearOpMode {
         }
         telemetry.addLine("Signal Detected: " + tracker.signalDetected);
         telemetry.update();
-        sleep(1000);
+
+        sleep(1000); //Unecessary can delete
+
+
+        //Code here to do cones if you want.
+
+
+
         switch (tracker.signalDetected){
             case "1 Bolt":
-                //Where you want to move for Bolt
                 telemetry.addLine("Bolt running");
+                telemetry.update();
+
+                //Code here for bolt movement
+
+
                 break;
             case "2 Bulb":
                 telemetry.addLine("Bulb running");
+                telemetry.update();
+
+                //Code here for bulb movement;
+
+
                 break;
             case "3 Panel" :
                 telemetry.addLine("Panel running");
+                telemetry.update();
+
+                //Code here for panel movement
+
+
                 break;
         }
-        sleep(1000);
-        telemetry.update();
+
+        sleep(1000); //Unecessary, can delete
         //robot moves to high junction
 
         robot.moveRightFT(cmTicks * 60, 0.5);

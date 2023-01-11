@@ -67,24 +67,13 @@ public class Tracker implements Runnable {
     Spark robot;
     Telemetry telem;
 
-
-    public enum CameraPlacement {
-        FRONT
-    }
-
     public String signalDetected = null;
 
-    public Tracker(LinearOpMode opmode, CameraPlacement type, Spark robot) {
+    public Tracker(LinearOpMode opmode, Spark robot) {
         this.opmode = opmode;
         hardwareMap = opmode.hardwareMap;
         telem = opmode.telemetry;
         this.robot = robot;
-        switch (type) {
-            case FRONT: //Test camera placement configuration
-                final float CAMERA_FORWARD_DISPLACEMENT = 0.0f * mmPerInch;   // eg: Enter the forward distance from the center of the robot to the camera lens
-                final float CAMERA_VERTICAL_DISPLACEMENT = 6.0f * mmPerInch;   // eg: Camera is 6 Inches above ground
-                final float CAMERA_LEFT_DISPLACEMENT = 0.0f * mmPerInch;   // eg: Enter the left distance from the center of the robot to the camera lens
-        }
     }
 
     public void run(){
@@ -93,7 +82,7 @@ public class Tracker implements Runnable {
             trackObjects();
 
             //Breaks the thread if the signal is detected
-            if (signalDetected != null){
+            if (signalDetected != "0" && signalDetected != null){
                 break;
             }
 
