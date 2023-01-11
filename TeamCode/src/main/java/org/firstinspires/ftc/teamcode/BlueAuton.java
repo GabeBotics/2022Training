@@ -18,14 +18,17 @@ import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 public class BlueAuton extends LinearOpMode {
     private Spark robot;
+    private Tracker tracker;
     private ElapsedTime runtime = new ElapsedTime();
     @Override
     public void runOpMode() {
         robot = new Spark(this, MECHANUM);
+        tracker = new Tracker(this, Tracker.CameraPlacement.FRONT, robot);
         telemetry.addData("Status", "Initialized");
         runtime.reset();
         telemetry.update();
 
+        tracker.loadTracker();
         waitForStart(); //Below this point is where you place the linear code for your autonomous.
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
@@ -39,8 +42,32 @@ public class BlueAuton extends LinearOpMode {
         //wall
 
         //PLACE IMAGE RECOGNITION CODE HERE
+        tracker.run();
 
+        while (tracker.signalDetected == "0" && runtime.milliseconds() < 10000){
+            //Here you can move around, or whatever you want to do to try and detect the object. I suggest putting
+            //a time limit so you can do the rest of the auton if you do not detect it.
+            //If the signal is found, signalDetected will be the String object
+        }
+        telemetry.addLine("Signal Detected: " + tracker.signalDetected);
+        telemetry.update();
+        sleep(1000);
+        switch (tracker.signalDetected){
+            case "1 Bolt":
+                //Where you want to move for Bolt
+                telemetry.addLine("Bolt running");
+                break;
+            case "2 Bulb":
+                telemetry.addLine("Bulb running");
+                break;
+            case "3 Panel" :
+                telemetry.addLine("Panel running");
+                break;
+        }
+        sleep(1000);
+        telemetry.update();
         //robot moves to high junction
+
         robot.moveRightFT(cmTicks * 60, 0.5);
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 90, 0.5);
@@ -101,11 +128,6 @@ public class BlueAuton extends LinearOpMode {
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
         while (opModeIsActive() && runtime.milliseconds() < 30000) {
-            telemetry.addData("motor1", robot.motor1.getCurrentPosition());
-            telemetry.addData("motor2", robot.motor2.getCurrentPosition());
-            telemetry.addData("motor3", robot.motor3.getCurrentPosition());
-            telemetry.addData("motor4", robot.motor4.getCurrentPosition());
-            telemetry.update();
 
 
 

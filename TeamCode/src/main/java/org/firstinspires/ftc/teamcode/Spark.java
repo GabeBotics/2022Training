@@ -105,9 +105,9 @@ public class Spark {
                 armTouch.setMode(DigitalChannel.Mode.INPUT);
                 //Set directions to ensure that robot moves forward when
                 //all motor power is 1
-                motor1.setDirection(DcMotor.Direction.FORWARD);
+                motor1.setDirection(DcMotor.Direction.REVERSE);
                 motor2.setDirection(DcMotor.Direction.FORWARD);
-                motor3.setDirection(DcMotor.Direction.FORWARD);
+                motor3.setDirection(DcMotor.Direction.REVERSE);
                 motor4.setDirection(DcMotor.Direction.FORWARD);
                 //Add motors to arrays
                 //forward array contains all motors
@@ -232,6 +232,11 @@ public class Spark {
         while (auton.opModeIsActive() & !finished) {
             for (DcMotor x : forward) {
                 if (x.getCurrentPosition() >= x.getTargetPosition() + 2 || x.getCurrentPosition() <= x.getTargetPosition() - 2) {
+                    telemetry.addData("motor1", motor1.getCurrentPosition());
+                    telemetry.addData("motor2", motor2.getCurrentPosition());
+                    telemetry.addData("motor3", motor3.getCurrentPosition());
+                    telemetry.addData("motor4", motor4.getCurrentPosition());
+                    telemetry.update();
                     continue;
                 } else {
                     finished = true;
@@ -249,7 +254,8 @@ public class Spark {
 
     public void turnRightFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
-        this.rest();
+        resetDriveEncoders();
+
         for(DcMotor x: left){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(ticks);
@@ -258,16 +264,16 @@ public class Spark {
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
         }
+
         this.turnRight(speed);
         waitForMotors();
-        for (DcMotor x : forward) {
-            x.setPower(0);
-            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+
+        resetDriveEncoders();
     }
     public void turnLeftFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
-        this.rest();
+        resetDriveEncoders();
+
         for(DcMotor x: left){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
@@ -278,14 +284,14 @@ public class Spark {
         }
         this.turnLeft(speed);
         waitForMotors();
-        for (DcMotor x : forward) {
-            x.setPower(0);
-            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+
+        resetDriveEncoders();
     }
     public void moveRightFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
-        this.rest();
+
+        resetDriveEncoders();
+
         for(DcMotor x: special){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
@@ -295,15 +301,17 @@ public class Spark {
             x.setTargetPosition(ticks);
         }
         this.moveRight(speed);
+
         waitForMotors();
-        for (DcMotor x : forward) {
-            x.setPower(0);
-            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+
+        resetDriveEncoders();
+
     }
     public void moveLeftFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
-        this.rest();
+
+        resetDriveEncoders();
+
         for(DcMotor x: special){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(ticks);
@@ -314,51 +322,84 @@ public class Spark {
         }
         this.moveLeft(speed);
         waitForMotors();
-        for (DcMotor x : forward) {
-            x.setPower(0);
-            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+
+        resetDriveEncoders();
+
     }
     public void moveForwardFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
-        this.rest();
+        resetDriveEncoders();
+
         for(DcMotor x: forward){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
         }
         this.moveForward(speed);
         waitForMotors();
-        for (DcMotor x : forward) {
-            x.setPower(0);
-            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+
+        resetDriveEncoders();
+
     }
     public void moveBackwardFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
-        this.rest();
+
+        resetDriveEncoders();
+
         for(DcMotor x: forward){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             x.setTargetPosition(-ticks);
         }
         this.moveBackward(speed);
 
+        waitForMotors();
 
-        for (DcMotor x : forward) {
-            x.setPower(0);
-            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
+        resetDriveEncoders();
     }
     public void armUpFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
         this.rest();
-        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setTargetPosition(ticks);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(speed);
+
+        while (auton.opModeIsActive()) {
+            if (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+                continue;
+            } else {
+                break;
+            }
+        }
+        armMotor.setPower(0);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
     }
     public void armDownFT(int ticks, double speed) {
         //Blocks until the robot has gotten to the desired location.
         this.rest();
-        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setTargetPosition(-ticks);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armDown(speed);
+
+        while (auton.opModeIsActive()) {
+            if (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+                continue;
+            } else {
+                break;
+            }
+        }
+        armMotor.setPower(0);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     //0.08 Scissor Position
