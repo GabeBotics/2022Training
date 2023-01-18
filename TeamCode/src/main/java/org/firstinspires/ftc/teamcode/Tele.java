@@ -26,11 +26,7 @@ public class Tele extends OpMode {
        // telemetry.addData("ArmTouch: ", robot.armIsDown());
        // telemetry.update();
         //If the gamepad is NOT at rest, then we want to see what we need to do.
-        telemetry.addData("armMotor", robot.armMotor.getPower());
-        telemetry.addData("servo", robot.clawServo.getPosition());
-        telemetry.addData("right_trigger", gamepad2.right_trigger);
-        telemetry.addData("left_trigger", gamepad2.left_trigger);
-        telemetry.addData("left stick y", gamepad2.left_stick_y);
+        telemetry.addData("Touch", robot.armIsDown());
         telemetry.update();
 
         if (gamepad1.atRest() && gamepad2.atRest()) robot.rest();

@@ -389,6 +389,9 @@ public class Spark {
         armDown(speed);
 
         while (auton.opModeIsActive()) {
+            if (armIsDown()){
+                break;
+            }
             if (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
                 telemetry.addData("armMotor", armMotor.getCurrentPosition());
                 telemetry.update();
