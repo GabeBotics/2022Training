@@ -50,8 +50,6 @@ public class Tracker implements Runnable {
 
     private static final float mmPerInch        = 25.4f;
 
-    private static final double maxSignalTrackTime = 10;
-
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
      * localization engine.
@@ -85,10 +83,6 @@ public class Tracker implements Runnable {
 
             //Breaks the thread if the signal is detected
             if (signalDetected != "0"){
-                break;
-            }
-
-            if (opmode.getRuntime() >= maxSignalTrackTime){
                 break;
             }
 

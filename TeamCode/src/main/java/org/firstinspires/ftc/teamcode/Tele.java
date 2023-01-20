@@ -50,7 +50,35 @@ public class Tele extends OpMode {
             if (gamepad2.right_stick_x > 0.8) {
                 robot.servoPrepare();
             }
+               
+           
+                //load preset
+            if (gamepad2.a) {
+                robot.armLoad;
+            }
 
+                //primed preset
+            if (gamepad2.y) {
+                robot.armPrimed;
+            }
+
+                //low junction preset
+            if (gamepad2.dpad_down) {
+                robot.armLow;
+            }
+
+                //medium junction preset
+            if (gamepad2.dpad_right) {
+                robot.armMedium;
+            }
+
+                //high junction preset
+            if (gamepad2.dpad_up) {
+                robot.armHigh;
+            }
+
+
+            }
             robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         }

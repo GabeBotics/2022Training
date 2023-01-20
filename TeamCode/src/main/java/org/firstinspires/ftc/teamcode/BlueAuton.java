@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
+import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM; 
 
 //import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 //import javax.swing.text.html.parser.ContentModel;
@@ -20,6 +20,7 @@ public class BlueAuton extends LinearOpMode {
     private Spark robot;
     private Tracker tracker;
     private ElapsedTime runtime = new ElapsedTime();
+    String originalSignal = "0";
     @Override
     public void runOpMode() {
         robot = new Spark(this, MECHANUM);
@@ -35,8 +36,8 @@ public class BlueAuton extends LinearOpMode {
 
         int restTicks = 250; //sleep for 250 milliseconds
         int cmTicks = 20; //1 cm
-        int degTicks = 650; //45 degree turn
-        int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
+        int degTicks = 1300; //90 degree turn
+        int secondsToWaitForSignal = 10;
 
         //robot code for bottom left and top right   
         //place the robot so that the camera is on the opposite side of the robot from the side closest to the 
@@ -50,152 +51,73 @@ public class BlueAuton extends LinearOpMode {
             //a time limit so you can do the rest of the auton if you do not detect it.
             //If the signal is found, signalDetected will be the String object
         }
-
+        originalSignal = tracker.signalDetected;
 
         //Code here to do cones
-        
+        sleep(restTicks);
+        robot.moveRightFT(cmTicks * 60, 0.5);
+        //robot moves to the right to position itself towards the tall junction.
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 90, 0.5);
+        //robot moves backward to arrive at the tall junction.
+        sleep(restTicks);                                   
+        robot.turnRightFT(degTicks, 0.5);
+        //robot turns to face the tall junction.
+        sleep(restTicks);
+        robot.armUpFT(180, 0.5);
+        //robot moves its arm to high junction.
+        sleep(restTicks);
+        robot.servoOpen();
+        //open claw to deposit cone.
+        sleep(restTicks);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-        switch (tracker.signalDetected){
+        switch (originalSignal){
             case "1 Bolt":
                 telemetry.addLine("Bolt running");
-                telemetry.update();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                //code here for cones
-                //robot moves to the right to position itself towards the tall junction.
-                sleep(restTicks);
-                robot.moveRightFT(cmTicks * 60, 0.5);                                                
-                //robot moves backward to arrive at the tall junction. 
-                sleep(restTicks);                                                    
-                robot.moveBackwardFT(cmTicks * 90, 0.5);                                                                  
-                //robot turns to face the tall junction.
-                sleep(restTicks);                                                       
-                robot.turnRightFT(degTicks, 0.5); 
-                //robot moves its arm to high junction.
-                sleep(restTicks);                                                       
-                robot.armUpFT(180, 0.5);                                                
-                //open claw to deposit cone.                                 
-                sleep(restTicks);                                                       
-                robot.servoOpen();
+                telemetry.update();                
+               
+                robot.moveLeftFT(cmTicks * 30, 0.5);
+                //robot moves a little left to park in the first position.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                 break;
             case "2 Bulb":
                 telemetry.addLine("Bulb running");
                 telemetry.update();
 
-                //Code here for bulb movement
-
-                robot.moveRightFT(cmTicks * 60, 0.5);
-                //robot moves to the right to position itself towards the tall junction.
+                robot.moveLeftFT(cmTicks * 30, 0.5);
+                //robot moves a little left for parking.
                 sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 90, 0.5);
-                //robot moves backward to arrive at the tall junction.
-                sleep(restTicks);
-                robot.turnRightFT(degTicks, 0.5);
-                //robot turns to face the tall junction.
-                sleep(restTicks);
-                robot.armUpFT(180, 0.5);
-                //robot moves its arm to high junction.
-                sleep(restTicks);
-                robot.servoOpen();
-                //open claw to deposit cone.
-
+                robot.moveBackwardFT(cmTicks * 60, 0.5);
+                //robot moves backwards to park in the second position.
 
                 break;
             case "3 Panel" :
                 telemetry.addLine("Panel running");
                 telemetry.update();
 
-                //Code here for panel movement
-
-                robot.moveRightFT(cmTicks * 60, 0.5);                                   
-                //robot moves to the right to position itself towards the tall junction.
-                sleep(restTicks);                                                       
-                robot.moveBackwardFT(cmTicks * 90, 0.5);                                
-                //robot moves backward to arrive at the tall junction.                  
-                sleep(restTicks);                                                       
-                robot.turnRightFT(degTicks, 0.5);                                       
-                //robot turns to face the tall junction.                                
-                sleep(restTicks);                                                       
-                robot.armUpFT(180, 0.5);                                                
-                //robot moves its arm to high junction.                                 
-                sleep(restTicks);                                               
-                robot.servoOpen(); 
-                //open claw to deposit cone.
+                robot.moveLeftFT(cmTicks * 30, 0.5);
+                //robot moves a little left for parking.
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 120, 0.5);
+                //robot moves backwards to park in the third position.
 
                 break;
             default:
                 telemetry.addLine("No signal detected running");
                 telemetry.update();
 
-                //Code here for movement if no signal detected
-
-                robot.moveRightFT(cmTicks * 60, 0.5);
-                //robot moves to the right to position itself towards the tall junction.
+                robot.moveLeftFT(cmTicks * 30, 0.5);
+                //robot moves a little left for parking.
                 sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 90, 0.5);
-                //robot moves backward to arrive at the tall junction.
-                sleep(restTicks);
-                robot.turnRightFT(degTicks, 0.5);
-                //robot turns to face the tall junction.
-                sleep(restTicks);
-                robot.armUpFT(180, 0.5);
-                //robot moves its arm to high junction.
-                sleep(restTicks);
-                robot.servoOpen();
-                robot.servoClose();
-
-                //open claw to deposit cone.
+                robot.moveBackwardFT(cmTicks * 120, 0.5);
+                //robot moves backwards to park in the third position.
+                
+                break;
         }
 
         sleep(1000); //Unecessary, can delete
         //robot moves to high junction
         
-        /*
-        for (int a = 0; a < 2; a++) {
-            
-            //MEDIUM JUNCTION SECTION
-
-                //robot moves to  cone
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-                sleep(restTicks);
-                robot.turnLeftFT(degTicks, 0.5);
-                sleep(restTicks);
-            
-                //claw close to grab cone
-                robot.servoClose();
-
-                //robot moves to medium junction
-                robot.turnLeftFT(degTicks * 3, 0.5);
-                sleep(restTicks);
-                robot.moveRightFT(cmTicks * 90, 0.5);
-            
-                //raises arm to medium junction height
-                robot.armUpFT(145, 0.5);
-
-                //claw open to release cone
-                robot.servoOpen();
-
-
-            //TALL JUNCTION SECTION
-                //robot moves to cone
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-                sleep(restTicks);
-                robot.turnRightFT(degTicks * 3, 0.5);
-                
-                //claw close to get cone 
-                robot.servoClose();
-           
-                //Robot moves to high junction
-                robot.turnRightFT(degTicks * 3, 0.5);
-                sleep(restTicks);
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-
-                //arm goes to high junction height
-                robot.armUpFT(180, 0.5);
-                //claw open to deposit cone
-                robot.servoOpen();
-        }
-        */
         
         //Park wherever initially indicated by the signal sleeve
 

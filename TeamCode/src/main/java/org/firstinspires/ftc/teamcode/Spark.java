@@ -16,6 +16,11 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Spark {
+
+    public static final int PRIMED = 300;
+    public static final int LOW = 600;
+    public static final int MEDIUM = 900;
+    public static final int HIGH = 1200;
     //Define servo and motor variables
     public DcMotor motor1, motor2, motor3, motor4;
     public CRServo crservo1;
@@ -28,7 +33,6 @@ public class Spark {
     OpMode tele;
     public Drivetrain drive;
     DigitalChannel armTouch;
-
     public Telemetry telemetry;
 
     public DcMotor[] forward, front, right, left, special, unique;
@@ -38,6 +42,7 @@ public class Spark {
         MECHANUM,
         TANK
     }
+
     //Constructor for Teleop
     public Spark(OpMode opmode, Drivetrain type) {
 
@@ -168,7 +173,9 @@ public class Spark {
         for (DcMotor x : special) x.setPower(pace);
     }
 
-    public void armUp(double pace) { armMotor.setPower(pace); }
+    public void armUp(double pace) {
+        armMotor.setPower(pace);
+    }
 
     public void armDown(double pace) {
         armMotor.setPower(-pace);
@@ -394,10 +401,10 @@ public class Spark {
             }
             if (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
                 telemetry.addData("armMotor", armMotor.getCurrentPosition());
-                telemetry.update();
+                  telemetry.update();
                 continue;
             } else {
-                break;
+              break;
             }
         }
         armMotor.setPower(0);
@@ -417,5 +424,78 @@ public class Spark {
 
     public void servoPrepare() {
         clawServo.setPosition(0.3);
+    }
+
+    public void armLoad() {
+        robot.armDown(0.5);
+        while(!armIsDown) {
+            continue;
+        }      
+        robot.armStop();
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        sleep(100);
+        robot.servoClose();
+    }
+    
+    public void armPrimed() {
+        armMotor.setTargetPosition(PRIMED);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+
+        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+                continue;
+        }
+
+        armStop();
+        robot.servoOpen();
+    }
+
+    public void armLow() {
+        armMotor.setTargetPosition(LOW);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+
+        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+                continue;
+        }
+
+        armStop();
+    }
+
+    public void armMedium() {
+        armMotor.setTargetPosition(MEDIUM);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+
+        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+                continue;
+        }
+
+        armStop();
+    }
+
+    public void armHigh() {
+        armMotor.setTargetPosition(HIGH);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+
+        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+                continue;
+        }
+
+        armStop();
     }
 }
