@@ -1,26 +1,23 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-
-import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
 //import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 //import javax.swing.text.html.parser.ContentModel;
 //import javax.xml.catalog.GroupEntry.ResolveType;
 
 
-@Autonomous(name="BlueAuton", group="Template")
+@Autonomous(name="ParkingAuton", group="Template")
 //@Disabled
 
-public class BlueAuton extends LinearOpMode {
+public class ParkingAuton extends LinearOpMode {
     private Spark robot;
     private Tracker tracker;
     private ElapsedTime runtime = new ElapsedTime();
-    private String originalDetected = "0";
     @Override
     public void runOpMode() {
         robot = new Spark(this, MECHANUM);
@@ -34,9 +31,9 @@ public class BlueAuton extends LinearOpMode {
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
 
-        int restTicks = 100; //sleep for 200 milliseconds
-        int cmTicks = 19; //1 cm
-        int degTicks = 440; //45 degree turn
+        int restTicks = 250; //sleep for 250 milliseconds
+        int cmTicks = 20; //1 cm
+        int degTicks = 650; //45 degree turn
         int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
 
         //robot code for bottom left and top right   
@@ -51,44 +48,24 @@ public class BlueAuton extends LinearOpMode {
             //a time limit so you can do the rest of the auton if you do not detect it.
             //If the signal is found, signalDetected will be the String object
         }
-        originalDetected = tracker.signalDetected;
-
 
 
         //Code here to do cones
-
-        robot.servoClose();
-        sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 120, 0.5);
-        sleep(restTicks);
-        robot.turnRightFT(degTicks * 3, 0.5);
-        sleep(restTicks);
-        robot.armHigh();
-        sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 25, 0.5);
-        sleep(restTicks);
-        robot.servoOpen();
-        sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 25, 0.5);
-        sleep(restTicks);
-
-
-
-        switch (originalDetected){
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        switch (tracker.signalDetected){
             case "1 Bolt":
                 telemetry.addLine("Bolt running");
                 telemetry.update();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-
-
+               robot.moveBackwardFT(cmTicks * 60, 0.5);
+               sleep(restTicks);
+               robot.moveRightFT(cmTicks * 60, 0.5);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                 break;
             case "2 Bulb":
                 telemetry.addLine("Bulb running");
                 telemetry.update();
-
-                //Code here for bulb movement
-
+                robot.moveBackwardFT(cmTicks * 60, 0.5);
 
 
 
@@ -96,8 +73,9 @@ public class BlueAuton extends LinearOpMode {
             case "3 Panel" :
                 telemetry.addLine("Panel running");
                 telemetry.update();
-
-                //Code here for panel movement
+                robot.moveBackwardFT(cmTicks * 60, 0.5);
+                sleep(restTicks);
+                robot.moveLeftFT(cmTicks * 60, 0.5);
 
 
 
@@ -106,57 +84,12 @@ public class BlueAuton extends LinearOpMode {
                 telemetry.addLine("No signal detected running");
                 telemetry.update();
 
+
         }
 
         sleep(1000); //Unecessary, can delete
         //robot moves to high junction
-        
-        /*
-        for (int a = 0; a < 2; a++) {
-            
-            //MEDIUM JUNCTION SECTION
 
-                //robot moves to  cone
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-                sleep(restTicks);
-                robot.turnLeftFT(degTicks, 0.5);
-                sleep(restTicks);
-            
-                //claw close to grab cone
-                robot.servoClose();
-
-                //robot moves to medium junction
-                robot.turnLeftFT(degTicks * 3, 0.5);
-                sleep(restTicks);
-                robot.moveRightFT(cmTicks * 90, 0.5);
-            
-                //raises arm to medium junction height
-                robot.armUpFT(145, 0.5);
-
-                //claw open to release cone
-                robot.servoOpen();
-
-
-            //TALL JUNCTION SECTION
-                //robot moves to cone
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-                sleep(restTicks);
-                robot.turnRightFT(degTicks * 3, 0.5);
-                
-                //claw close to get cone 
-                robot.servoClose();
-           
-                //Robot moves to high junction
-                robot.turnRightFT(degTicks * 3, 0.5);
-                sleep(restTicks);
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-
-                //arm goes to high junction height
-                robot.armUpFT(180, 0.5);
-                //claw open to deposit cone
-                robot.servoOpen();
-        }
-        */
         
         //Park wherever initially indicated by the signal sleeve
 

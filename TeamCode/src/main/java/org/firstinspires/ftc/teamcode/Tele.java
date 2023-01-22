@@ -33,10 +33,10 @@ public class Tele extends OpMode {
         else {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
             //GAMEPAD 1 CODE
-            if (gamepad2.left_stick_y < -0.3) {
-                robot.armUp(-0.5);
-            } else if (gamepad2.left_stick_y > 0.3) {
-                robot.armDown(-0.5);
+            if (gamepad2.left_stick_y < -0.2) {
+                robot.armUp(-gamepad2.left_stick_y);
+            } else if (gamepad2.left_stick_y > 0.2) {
+                robot.armDown(gamepad2.left_stick_y);
             } else {
                 robot.armStop();
             }
@@ -50,37 +50,34 @@ public class Tele extends OpMode {
             if (gamepad2.right_stick_x > 0.8) {
                 robot.servoPrepare();
             }
-               
-           
-                //load preset
+
+
+            //load preset
             if (gamepad2.a) {
-                robot.armLoad;
+                robot.armLoad();
             }
 
-                //primed preset
+            //primed preset
             if (gamepad2.y) {
-                robot.armPrimed;
+                robot.armPrimed();
             }
 
-                //low junction preset
+            //low junction preset
             if (gamepad2.dpad_down) {
-                robot.armLow;
+                robot.armLow();
             }
 
-                //medium junction preset
+            //medium junction preset
             if (gamepad2.dpad_right) {
-                robot.armMedium;
+                robot.armMedium();
             }
 
-                //high junction preset
+            //high junction preset
             if (gamepad2.dpad_up) {
-                robot.armHigh;
+                robot.armHigh();
             }
 
-
-            }
             robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
-
         }
     }
 }

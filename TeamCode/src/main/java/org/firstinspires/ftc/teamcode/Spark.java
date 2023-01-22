@@ -18,9 +18,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Spark {
 
     public static final int PRIMED = 300;
-    public static final int LOW = 600;
-    public static final int MEDIUM = 900;
-    public static final int HIGH = 1200;
+    public static final int LOW = 1500;
+    public static final int MEDIUM = 3000;
+    public static final int HIGH = 4200;
     //Define servo and motor variables
     public DcMotor motor1, motor2, motor3, motor4;
     public CRServo crservo1;
@@ -114,6 +114,8 @@ public class Spark {
                 motor2.setDirection(DcMotor.Direction.FORWARD);
                 motor3.setDirection(DcMotor.Direction.REVERSE);
                 motor4.setDirection(DcMotor.Direction.FORWARD);
+                armMotor.setDirection(DcMotor.Direction.REVERSE);
+                armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                 //Add motors to arrays
                 //forward array contains all motors
                 forward = new DcMotor[]{motor1, motor2, motor3, motor4};
@@ -339,7 +341,7 @@ public class Spark {
 
         for(DcMotor x: forward){
             x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            x.setTargetPosition(-ticks);
+            x.setTargetPosition(ticks);
         }
         this.moveForward(speed);
         waitForMotors();
@@ -427,15 +429,15 @@ public class Spark {
     }
 
     public void armLoad() {
-        robot.armDown(0.5);
-        while(!armIsDown) {
+        armDown(0.5);
+        while(!armIsDown()) {
             continue;
         }      
-        robot.armStop();
+        armStop();
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        sleep(100);
-        robot.servoClose();
+        auton.sleep(100);
+        servoClose();
     }
     
     public void armPrimed() {
@@ -451,7 +453,7 @@ public class Spark {
         }
 
         armStop();
-        robot.servoOpen();
+        servoOpen();
     }
 
     public void armLow() {
