@@ -1,21 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="Tele", group="Template")
+@TeleOp(name="TeleTwo", group="Template")
 //@Disabled
-public class Tele extends OpMode {
+public class TeleTwo extends OpMode {
 
-    private Spark robot;
+    private SparkTwo robot;
 
     @Override
     public void init() {
 
         //This code initializes the drivetrain. Make sure that you have the right drivetrain selected
-        robot = new Spark(this, Spark.Drivetrain.MECHANUM);
+        robot = new SparkTwo(this, SparkTwo.Drivetrain.MECHANUM);
     }
 
     @Override
@@ -34,10 +32,12 @@ public class Tele extends OpMode {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
             //GAMEPAD 1 CODE
             if (gamepad2.left_stick_y < -0.3) {
+                robot.armOverride();
                 robot.armUp(-gamepad2.left_stick_y);
             } else if (gamepad2.left_stick_y > 0.3) {
+                robot.armOverride();
                 robot.armDown(gamepad2.left_stick_y);
-            } else {
+            } else if (!robot.checkArm()){
                 robot.armStop();
             }
 
@@ -77,6 +77,7 @@ public class Tele extends OpMode {
             }
 
             robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+            robot.checkArm();
         }
     }
 }
