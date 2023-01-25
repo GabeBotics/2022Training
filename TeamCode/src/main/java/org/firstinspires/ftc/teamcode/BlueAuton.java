@@ -36,7 +36,8 @@ public class BlueAuton extends LinearOpMode {
 
         int restTicks = 100; //sleep for 200 milliseconds
         int cmTicks = 19; //1 cm
-        int degTicks = 440; //45 degree turn
+        int degTicks = 440
+                ; //45 degree turn
         int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
 
         //robot code for bottom left and top right   
@@ -71,33 +72,55 @@ public class BlueAuton extends LinearOpMode {
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 25, 0.5);
         sleep(restTicks);
-
+        robot.armPrimed();
+        sleep(restTicks);
+        robot.turnRightFT(degTicks * 7/2, 0.5);
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 35, 0.5);
+        sleep(restTicks);
+        robot.armLoad();
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 35, 0.5);
+        sleep(restTicks);
+        robot.turnLeftFT(degTicks * 7/2, 0.5);
+        sleep(restTicks);
+        robot.armHigh();
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 25, 0.5);
+        sleep(restTicks);
+        robot.servoOpen();
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 25, 0.5);
+        sleep(restTicks);
+        robot.armPrimed();
 
 
         switch (originalDetected){
-            case "1 Bolt":
+            case "Circle":
                 telemetry.addLine("Bolt running");
                 telemetry.update();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                //Code here for circle movement
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                 break;
-            case "2 Bulb":
+                //Square is three dots
+            case "Square":
                 telemetry.addLine("Bulb running");
                 telemetry.update();
 
-                //Code here for bulb movement
+                //Code here for square movement
 
 
 
 
                 break;
-            case "3 Panel" :
+                //Triangle is two dots
+            case "Triangle" :
                 telemetry.addLine("Panel running");
                 telemetry.update();
 
-                //Code here for panel movement
+                //Code here for triangle movement
 
 
 
@@ -166,3 +189,5 @@ public class BlueAuton extends LinearOpMode {
         }
     }
 }
+
+//e
