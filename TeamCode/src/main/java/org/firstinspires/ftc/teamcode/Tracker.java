@@ -28,9 +28,9 @@ public class Tracker implements Runnable {
     // private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
     private static final String[] LABELS = {
-            "1 Bolt",
-            "2 Bulb",
-            "3 Panel"
+            "Circle",
+            "Square",
+            "Triangle"
     };
 
     /*
