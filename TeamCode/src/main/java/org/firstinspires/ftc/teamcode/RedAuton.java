@@ -8,102 +8,201 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
+import android.speech.RecognitionService;
+
+//import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
+//import javax.swing.text.html.parser.ContentModel;
+//import javax.xml.catalog.GroupEntry.ResolveType;
+
 
 @Autonomous(name="RedAuton", group="Template")
 //@Disabled
 
 public class RedAuton extends LinearOpMode {
     private Spark robot;
-    private Wayfinder finder;
+    private Tracker tracker;
     private ElapsedTime runtime = new ElapsedTime();
+    private String originalDetected = "0";
     @Override
     public void runOpMode() {
         robot = new Spark(this, MECHANUM);
+        tracker = new Tracker(this, robot);
         telemetry.addData("Status", "Initialized");
         runtime.reset();
         telemetry.update();
-        Wayfinder finder = new Wayfinder(this, Wayfinder.CameraPlacement.FRONT, robot);
 
-        finder.initVuforia();
-
+        tracker.loadTracker();
         waitForStart(); //Below this point is where you place the linear code for your autonomous.
-        finder.run(); //Starts tracking targets, runs in background for duration of opmode
         //Any code that goes in this space is only run once, and after it is finished the program ends.
 
 
+        int restTicks = 100; //sleep for 200 milliseconds
+        int cmTicks = 19; //1 cm
+        int degTicks = 440; //45 degree turn
+        int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
 
-        int restTicks = 250; //(rest for 250 milliseconds)
-        int degTicks = 650; //(45 degree turn)
-        int cmTicks = 20; //(1 cm)
-            
-
-        
-
-        //robot code for top left and bottom right
-        //place the robot so that the camera is on the opposite side of the robot from the side closest to the 
+        //robot code for bottom left and top right
+        //place the robot so that the camera is on the opposite side of the robot from the side closest to the
         //wall
 
         //PLACE IMAGE RECOGNITION CODE HERE
+        tracker.run();
 
+        while ((tracker.signalDetected == "0") && runtime.milliseconds() < secondsToWaitForSignal*1000){
+            //Here you can move around, or whatever you want to do to try and detect the object. I suggest putting
+            //a time limit so you can do the rest of the auton if you do not detect it.
+            //If the signal is found, signalDetected will be the String object
+        }
+        originalDetected = tracker.signalDetected;
+
+
+
+        //Code here to do cones
+
+        robot.armLoad();
+        sleep(restTicks);
+        robot.armPrimed();
+        robot.moveBackwardFT(cmTicks * 125, 0.5);
+        sleep(restTicks);
+        robot.turnLeftFT(degTicks * 31/10,  0.5);
+        sleep(restTicks);
+        robot.armHigh();
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 25, 0.5);
+        sleep(restTicks + 1900);
+        robot.servoOpen();
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 25, 0.5);
+        sleep(restTicks);
+        robot.armPrimed();
+        robot.turnLeftFT(degTicks * 7/5, 0.5);
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 5, 0.5);
+       /* robot.turnRightFT(degTicks * 7/2, 0.5);
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 45, 0.2);
+        sleep(restTicks);
+        */
+        //robot.armLoad();
+        //sleep(restTicks);
+        /*
+        robot.moveBackwardFT(cmTicks * 72, 0.5);
+        sleep(restTicks);
+        robot.turnLeftFT(degTicks * 7/2, 0.5);
+        sleep(restTicks);
+        robot.moveRightFT(cmTicks * 13,0.5);
+        sleep(restTicks);
+        robot.armHigh();
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 27, 0.5);
+        sleep(restTicks);
+        robot.servoOpen();
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 27, 0.5);
+        sleep(restTicks);
+        robot.armPrimed();
+        sleep(restTicks);
+        */
+
+        /*robot.turnLeftFT(degTicks * 7/2, 0.5);
+        sleep(restTicks);
+         */
+
+
+        switch (originalDetected){
+            case "Circle":
+                telemetry.addLine("Bolt running");
+                telemetry.update();
+                //Code here for circle movement
+
+                sleep(restTicks);
+                robot.moveLeftFT(cmTicks * 65, 0.5);
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
+
+
+
+
+                break;
+
+            case "Triangle":
+                telemetry.addLine("Bulb running");
+                telemetry.update();
+                //Code here for triangle movement
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
+
+
+                break;
+
+            case "Square":
+                telemetry.addLine("Panel running");
+                telemetry.update();
+                //Code here for square movement
+                sleep(restTicks);
+                robot.moveRightFT(cmTicks * 60, 0.5);
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
+
+
+                break;
+            default:
+                telemetry.addLine("No signal detected running");
+                telemetry.update();
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
+
+        }
+
+        sleep(1000); //Unecessary, can delete
         //robot moves to high junction
-        robot.moveLeftFT(cmTicks*60, 0.5);
-        sleep(restTicks);
-        robot.moveBackwardFT(cmTicks*90, 0.5);
-        sleep(restTicks);
-        robot.turnLeftFT(degTicks*2, 0.5);
-        sleep(restTicks);
 
-        //arm goes up to high junction height
-        robot.armUpFT(180, 0.5);
+        /*
+        for (int a = 0; a < 2; a++) {
 
-        //open claw to deposit cone
-        robot.servoClose();
-       
-        for (int b = 0; b < 2; b++) {
-               
             //MEDIUM JUNCTION SECTION
 
                 //robot moves to  cone
-                robot.moveRightFT(cmTicks*90, 0.5);       
+                robot.moveLeftFT(cmTicks * 90, 0.5);
                 sleep(restTicks);
-                robot.turnRightFT(degTicks, 0.5);
+                robot.turnLeftFT(degTicks, 0.5);
                 sleep(restTicks);
 
                 //claw close to grab cone
                 robot.servoClose();
 
                 //robot moves to medium junction
-                robot.turnRightFT(degTicks*3, 0.5);
+                robot.turnLeftFT(degTicks * 3, 0.5);
                 sleep(restTicks);
-                robot.moveRightFT(cmTicks*90, 0.5);
-                sleep(restTicks);
+                robot.moveRightFT(cmTicks * 90, 0.5);
 
-                //arm raises to medium junction height
+                //raises arm to medium junction height
                 robot.armUpFT(145, 0.5);
-                sleep(restTicks);
 
-                //claw servo opens to deposit cone
+                //claw open to release cone
                 robot.servoOpen();
-            
+
+
             //TALL JUNCTION SECTION
                 //robot moves to cone
-                robot.moveLeftFT(cmTicks*90, 0.5);
+                robot.moveLeftFT(cmTicks * 90, 0.5);
                 sleep(restTicks);
-                robot.turnLeftFT(degTicks*3, 0.5);
+                robot.turnRightFT(degTicks * 3, 0.5);
 
-                //claw close to get cone 
+                //claw close to get cone
                 robot.servoClose();
 
-                //robot moves to high junction
-                robot.turnLeftFT(degTicks, 0.5);
+                //Robot moves to high junction
+                robot.turnRightFT(degTicks * 3, 0.5);
                 sleep(restTicks);
-                robot.moveLeftFT(cmTicks*90, 0.5);  
+                robot.moveLeftFT(cmTicks * 90, 0.5);
 
                 //arm goes to high junction height
                 robot.armUpFT(180, 0.5);
                 //claw open to deposit cone
                 robot.servoOpen();
         }
+        */
 
         //Park wherever initially indicated by the signal sleeve
 
@@ -113,3 +212,5 @@ public class RedAuton extends LinearOpMode {
         }
     }
 }
+
+//e

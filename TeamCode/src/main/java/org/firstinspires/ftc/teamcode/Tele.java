@@ -10,12 +10,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class Tele extends OpMode {
 
     private Spark robot;
+    double speedMod;
 
     @Override
     public void init() {
 
         //This code initializes the drivetrain. Make sure that you have the right drivetrain selected
         robot = new Spark(this, Spark.Drivetrain.MECHANUM);
+        speedMod = 0.7;
     }
 
     @Override
@@ -27,12 +29,15 @@ public class Tele extends OpMode {
        // telemetry.update();
         //If the gamepad is NOT at rest, then we want to see what we need to do.
         telemetry.addData("Touch", robot.armIsDown());
+        telemetry.addData("Speed", speedMod);
         telemetry.update();
 
         if (gamepad1.atRest() && gamepad2.atRest()) robot.rest();
         else {
             //If the gamepad is NOT at rest, then we want to see what we need to do.
             //GAMEPAD 1 CODE
+
+
             if (gamepad2.left_stick_y < -0.3) {
                 robot.armUp(-gamepad2.left_stick_y);
             } else if (gamepad2.left_stick_y > 0.3) {
@@ -52,10 +57,16 @@ public class Tele extends OpMode {
             }
 
             //load preset
-            if (gamepad2.a) {
-                robot.armLoad();
+            if (gamepad2.dpad_down) {
+                robot.armMotor.setPower(-1);
             }
 
+            speedMod = 0.7;
+
+            if (gamepad1.right_trigger > 0.3) {
+                speedMod = 1;
+            }
+            /*
             //primed preset
             if (gamepad2.y) {
                 robot.armPrimed();
@@ -75,8 +86,8 @@ public class Tele extends OpMode {
             if (gamepad2.dpad_up) {
                 robot.armHigh();
             }
-
-            robot.mechanumMovT(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+            */
+            robot.mechanumMovT(gamepad1.left_stick_x * speedMod, -gamepad1.left_stick_y * speedMod, gamepad1.right_stick_x * speedMod);
         }
     }
 }

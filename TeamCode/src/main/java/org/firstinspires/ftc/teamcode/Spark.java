@@ -20,7 +20,7 @@ public class Spark {
     public static final int PRIMED = 1000;
     public static final int LOW = 1500;
     public static final int MEDIUM = 3000;
-    public static final int HIGH = 4200;
+    public static final int HIGH = 4170;
     //Define servo and motor variables
     public DcMotor motor1, motor2, motor3, motor4;
     public CRServo crservo1;
@@ -457,7 +457,6 @@ public class Spark {
         }
 
         armStop();
-        servoOpen();
     }
 
     public void armLow() {

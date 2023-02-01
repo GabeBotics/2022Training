@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
+import android.speech.RecognitionService;
+
 //import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 //import javax.swing.text.html.parser.ContentModel;
 //import javax.xml.catalog.GroupEntry.ResolveType;
@@ -36,8 +38,7 @@ public class BlueAuton extends LinearOpMode {
 
         int restTicks = 100; //sleep for 200 milliseconds
         int cmTicks = 19; //1 cm
-        int degTicks = 440
-                ; //45 degree turn
+        int degTicks = 440; //45 degree turn
         int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
 
         //robot code for bottom left and top right   
@@ -58,41 +59,54 @@ public class BlueAuton extends LinearOpMode {
 
         //Code here to do cones
 
-        robot.servoClose();
+        robot.armLoad();
         sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 120, 0.5);
+        robot.armPrimed();
+        robot.moveBackwardFT(cmTicks * 125, 0.5);
         sleep(restTicks);
-        robot.turnRightFT(degTicks * 3, 0.5);
+        robot.turnRightFT(degTicks * 31/10, 0.5);
         sleep(restTicks);
         robot.armHigh();
         sleep(restTicks);
         robot.moveForwardFT(cmTicks * 25, 0.5);
-        sleep(restTicks);
+        sleep(restTicks + 1900);
         robot.servoOpen();
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 25, 0.5);
         sleep(restTicks);
         robot.armPrimed();
+        robot.turnRightFT(degTicks * 7/5, 0.5);
         sleep(restTicks);
-        robot.turnRightFT(degTicks * 7/2, 0.5);
+        robot.moveBackwardFT(cmTicks * 5, 0.5);
+       /* robot.turnRightFT(degTicks * 7/2, 0.5);
         sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 35, 0.5);
+        robot.moveForwardFT(cmTicks * 45, 0.2);
         sleep(restTicks);
-        robot.armLoad();
-        sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 35, 0.5);
+        */
+        //robot.armLoad();
+        //sleep(restTicks);
+        /*
+        robot.moveBackwardFT(cmTicks * 72, 0.5);
         sleep(restTicks);
         robot.turnLeftFT(degTicks * 7/2, 0.5);
         sleep(restTicks);
+        robot.moveRightFT(cmTicks * 13,0.5);
+        sleep(restTicks);
         robot.armHigh();
         sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 25, 0.5);
+        robot.moveForwardFT(cmTicks * 27, 0.5);
         sleep(restTicks);
         robot.servoOpen();
         sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 25, 0.5);
+        robot.moveBackwardFT(cmTicks * 27, 0.5);
         sleep(restTicks);
         robot.armPrimed();
+        sleep(restTicks);
+        */
+
+        /*robot.turnLeftFT(degTicks * 7/2, 0.5);
+        sleep(restTicks);
+         */
 
 
         switch (originalDetected){
@@ -101,33 +115,42 @@ public class BlueAuton extends LinearOpMode {
                 telemetry.update();
                 //Code here for circle movement
 
+                sleep(restTicks);
+                robot.moveLeftFT(cmTicks * 65, 0.5);
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
+
+
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                 break;
-                //Square is three dots
-            case "Square":
+
+            case "Triangle":
                 telemetry.addLine("Bulb running");
                 telemetry.update();
-
-                //Code here for square movement
-
-
+                //Code here for triangle movement
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
 
 
                 break;
-                //Triangle is two dots
-            case "Triangle" :
+
+            case "Square":
                 telemetry.addLine("Panel running");
                 telemetry.update();
-
-                //Code here for triangle movement
-
+                //Code here for square movement
+                sleep(restTicks);
+                robot.moveRightFT(cmTicks * 60, 0.5);
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
 
 
                 break;
             default:
                 telemetry.addLine("No signal detected running");
                 telemetry.update();
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 55, 0.5);
 
         }
 
