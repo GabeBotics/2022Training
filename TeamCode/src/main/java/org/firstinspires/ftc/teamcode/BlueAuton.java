@@ -38,7 +38,7 @@ public class BlueAuton extends LinearOpMode {
 
         int restTicks = 100; //sleep for 200 milliseconds
         int cmTicks = 19; //1 cm
-        int degTicks = 440; //45 degree turn
+        int degTicks = 466; //45 degree turn
         int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
 
         //robot code for bottom left and top right   
@@ -62,22 +62,43 @@ public class BlueAuton extends LinearOpMode {
         robot.armLoad();
         sleep(restTicks);
         robot.armPrimed();
-        robot.moveBackwardFT(cmTicks * 125, 0.5);
-        sleep(restTicks);
-        robot.turnRightFT(degTicks * 31/10, 0.5);
-        sleep(restTicks);
-        robot.armHigh();
-        sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 25, 0.5);
-        sleep(restTicks + 1900);
+        robot.moveBackwardFT(cmTicks * 83,0.75);
+        robot.moveForwardFT(cmTicks * 20,0.5);
+        robot.turnRightFT(degTicks * 3,0.5);
+        robot.armMedium();
+        robot.moveForwardFT(cmTicks * 25,0.5);
         robot.servoOpen();
         sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 25, 0.5);
+        robot.moveBackwardFT(cmTicks * 25,0.5);
         sleep(restTicks);
         robot.armPrimed();
-        robot.turnRightFT(degTicks * 7/5, 0.5);
         sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 5, 0.5);
+        robot.turnRightFT(degTicks * 31/10,0.5);
+        sleep(restTicks);
+        robot.moveLeftFT(cmTicks * 68,0.5);
+        sleep(restTicks);
+        robot.moveRightFT(cmTicks * 10,0.5);
+        robot.armUpFT(500, 0.5);
+        robot.moveForwardFT(cmTicks * 67,0.4);
+        sleep(restTicks);
+        robot.armDownFT(625, 0.5); //Goes in the cone
+        sleep(restTicks);
+        robot.servoClose();
+        sleep(restTicks);
+        robot.armUpFT(200,0.5);
+        robot.moveBackwardFT(cmTicks * 30,0.5);
+        robot.turnRightFT(degTicks * 2,0.5);
+        robot.armLow();
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 5,0.5);
+        robot.armLoad();
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 5,0.5);
+
+
+
+
+
        /* robot.turnRightFT(degTicks * 7/2, 0.5);
         sleep(restTicks);
         robot.moveForwardFT(cmTicks * 45, 0.2);
@@ -109,7 +130,7 @@ public class BlueAuton extends LinearOpMode {
          */
 
 
-        switch (originalDetected){
+      /*  switch (originalDetected){
             case "Circle":
                 telemetry.addLine("Bolt running");
                 telemetry.update();
