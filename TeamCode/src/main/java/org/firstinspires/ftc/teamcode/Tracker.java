@@ -50,6 +50,8 @@ public class Tracker implements Runnable {
 
     private static final float mmPerInch        = 25.4f;
 
+    private static final double trackerTime        = 5;
+
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
      * localization engine.
@@ -75,7 +77,7 @@ public class Tracker implements Runnable {
         telem = opmode.telemetry;
         this.robot = robot;
     }
-
+    @Override
     public void run(){
 
         while(opmode.opModeIsActive() && !opmode.isStopRequested()){
@@ -83,6 +85,10 @@ public class Tracker implements Runnable {
 
             //Breaks the thread if the signal is detected
             if (signalDetected != "0"){
+                break;
+            }
+
+            if (opmode.getRuntime() > trackerTime){
                 break;
             }
 

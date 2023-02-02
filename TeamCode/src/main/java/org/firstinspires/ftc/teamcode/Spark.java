@@ -43,6 +43,17 @@ public class Spark {
         TANK
     }
 
+    public enum ArmState {
+        prime,
+        load,
+        high,
+        med,
+        low,
+        normal
+    }
+
+    Spark.ArmState armStatus = Spark.ArmState.normal;
+
     //Constructor for Teleop
     public Spark(OpMode opmode, Drivetrain type) {
 
@@ -242,9 +253,10 @@ public class Spark {
 
     public void waitForMotors(){ // This method safely loops while checking if the opmode is active.
         boolean finished = false;
-        while (auton.opModeIsActive() & !finished) {
+        while (auton.opModeIsActive() && !finished && !auton.isStopRequested()) {
             for (DcMotor x : forward) {
                 if (x.getCurrentPosition() >= x.getTargetPosition() + 2 || x.getCurrentPosition() <= x.getTargetPosition() - 2) {
+                    checkArm();
                     telemetry.addData("motor1", motor1.getCurrentPosition());
                     telemetry.addData("motor2", motor2.getCurrentPosition());
                     telemetry.addData("motor3", motor3.getCurrentPosition());
@@ -377,7 +389,7 @@ public class Spark {
 
         armUp(speed);
 
-        while (auton.opModeIsActive()) {
+        while (auton.opModeIsActive() && !auton.isStopRequested()) {
             if (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
                 telemetry.addData("armMotor", armMotor.getCurrentPosition());
                 telemetry.update();
@@ -401,7 +413,7 @@ public class Spark {
 
         armDown(speed);
 
-        while (auton.opModeIsActive()) {
+        while (auton.opModeIsActive() && !auton.isStopRequested()) {
             if (armIsDown()){
                 break;
             }
@@ -432,9 +444,19 @@ public class Spark {
         clawServo.setPosition(0.3);
     }
 
+    public void waitForArm(){
+        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
+            telemetry.addData("armMotor", armMotor.getCurrentPosition());
+            telemetry.update();
+            if (!auton.opModeIsActive() || auton.isStopRequested()){
+                break;
+            }
+            continue;
+        }
+    }
     public void armLoad() {
         armDown(0.5);
-        while(!armIsDown()) {
+        while(!armIsDown() && auton.opModeIsActive() && !auton.isStopRequested()) {
             continue;
         }
         armStop();
@@ -450,11 +472,7 @@ public class Spark {
 
         armUp(0.5);
 
-        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
-            telemetry.addData("armMotor", armMotor.getCurrentPosition());
-            telemetry.update();
-            continue;
-        }
+        waitForArm();
 
         armStop();
     }
@@ -465,11 +483,7 @@ public class Spark {
 
         armUp(0.5);
 
-        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
-            telemetry.addData("armMotor", armMotor.getCurrentPosition());
-            telemetry.update();
-            continue;
-        }
+        waitForArm();
 
         armStop();
     }
@@ -480,11 +494,7 @@ public class Spark {
 
         armUp(0.5);
 
-        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
-            telemetry.addData("armMotor", armMotor.getCurrentPosition());
-            telemetry.update();
-            continue;
-        }
+        waitForArm();
 
         armStop();
     }
@@ -495,12 +505,90 @@ public class Spark {
 
         armUp(0.5);
 
-        while (armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2) {
-            telemetry.addData("armMotor", armMotor.getCurrentPosition());
-            telemetry.update();
-            continue;
-        }
+        waitForArm();
 
         armStop();
+    }
+
+    public void armLoadTele() {
+        armDown(0.5);
+
+        armStatus = Spark.ArmState.load;
+    }
+
+    public void armPrimedTele() {
+        armMotor.setTargetPosition(PRIMED);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+        armStatus = Spark.ArmState.prime;
+    }
+
+    public void armLowTele() {
+        armMotor.setTargetPosition(LOW);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+        armStatus = Spark.ArmState.low;
+    }
+
+    public void armMediumTele() {
+        armMotor.setTargetPosition(MEDIUM);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+        armStatus = Spark.ArmState.med;
+    }
+
+    public void armHighTele() {
+        armMotor.setTargetPosition(HIGH);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+        armStatus = Spark.ArmState.high;
+    }
+
+    public boolean checkArm(){
+
+        //Initial check to stop arm if too low
+
+        if (armStatus != Spark.ArmState.normal) {
+
+            if (armStatus == Spark.ArmState.load){
+                if (armIsDown()){
+
+                    armStop();
+                    armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    servoClose();
+                    armStatus = Spark.ArmState.normal;
+                    armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    return false;
+                }
+                return true;
+            }
+
+            if ((armMotor.getCurrentPosition() >= armMotor.getTargetPosition() + 2 || armMotor.getCurrentPosition() <= armMotor.getTargetPosition() - 2)) {
+                telemetry.addData("armMotor", armMotor.getCurrentPosition());
+                telemetry.update();
+            } else {
+                armStop();
+
+                if (armStatus == Spark.ArmState.prime) {
+                    servoOpen();
+                }
+
+                armStatus = Spark.ArmState.normal;
+                armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void armOverride(){
+        if (checkArm()) {
+            armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
     }
 }
