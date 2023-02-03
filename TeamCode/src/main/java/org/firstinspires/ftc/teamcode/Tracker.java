@@ -24,13 +24,13 @@ public class Tracker implements Runnable {
      * has been downloaded to the Robot Controller's SD FLASH memory, it must to be loaded using loadModelFromFile()
      * Here we assume it's an Asset. Also see method initTfod() below .
      */
-    private static final String TFOD_MODEL_ASSET = "PowerPlay.tflite";
+    private static final String TFOD_MODEL_ASSET = "PowerPlayCustom.tflite";
     // private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
     private static final String[] LABELS = {
-            "1 Bolt",
-            "2 Bulb",
-            "3 Panel"
+            "Circle",
+            "Square",
+            "Triangle"
     };
 
     /*
@@ -50,6 +50,8 @@ public class Tracker implements Runnable {
 
     private static final float mmPerInch        = 25.4f;
 
+    private static final double trackerTime        = 5;
+
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
      * localization engine.
@@ -67,7 +69,7 @@ public class Tracker implements Runnable {
     Spark robot;
     Telemetry telem;
 
-    public String signalDetected = null;
+    public String signalDetected = "0";
 
     public Tracker(LinearOpMode opmode, Spark robot) {
         this.opmode = opmode;
@@ -75,14 +77,18 @@ public class Tracker implements Runnable {
         telem = opmode.telemetry;
         this.robot = robot;
     }
-
+    @Override
     public void run(){
 
         while(opmode.opModeIsActive() && !opmode.isStopRequested()){
             trackObjects();
 
             //Breaks the thread if the signal is detected
-            if (signalDetected != "0" && signalDetected != null){
+            if (signalDetected != "0"){
+                break;
+            }
+
+            if (opmode.getRuntime() > trackerTime){
                 break;
             }
 
@@ -93,7 +99,8 @@ public class Tracker implements Runnable {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
@@ -145,7 +152,7 @@ public class Tracker implements Runnable {
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
                 telem.addData("# Objects Detected", updatedRecognitions.size());
-
+                telem.addData("Signal Detected: ", signalDetected);
                 // step through the list of recognitions and display image position/size information for each one
                 // Note: "Image number" refers to the randomized image orientation/number
                 for (Recognition recognition : updatedRecognitions) {
@@ -160,7 +167,6 @@ public class Tracker implements Runnable {
                     telem.addData("- Size (Width/Height)","%.0f / %.0f", width, height);
 
                     signalDetected = recognition.getLabel();
-
                 }
                 telem.update();
             }
