@@ -64,82 +64,97 @@ public class BlueAuton extends LinearOpMode {
         robot.armPrimed();
         robot.moveBackwardFT(cmTicks * 83,0.75);
         robot.moveForwardFT(cmTicks * 20,0.5);
-        robot.turnRightFT(degTicks * 3,0.5);
+
+        //robot moves in position to place a cone
+        robot.armMediumTele();
+        robot.turnRightFT(degTicks * 77/25,0.5);
         robot.armMedium();
-        robot.moveForwardFT(cmTicks * 25,0.5);
+        robot.moveForwardFT(cmTicks * 2394/100,0.5);
+        robot.armUpFT(90, 0.5);
+        sleep(restTicks);
+
+        //robot places a cone on a medium junction
+        sleep(restTicks * 10);
         robot.servoOpen();
         sleep(restTicks);
+        robot.armUpFT(280, 0.5);
         robot.moveBackwardFT(cmTicks * 25,0.5);
         sleep(restTicks);
-        robot.armPrimed();
+
+        robot.turnLeftFT(degTicks * 21/20, 0.5);
         sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 9/2, 0.5);
+
+        /*
+        sleep(restTicks);
+        robot.armPrimed();
         robot.turnRightFT(degTicks * 31/10,0.5);
         sleep(restTicks);
+
+        //robot moves in line with the cone stack
         robot.moveLeftFT(cmTicks * 68,0.5);
         sleep(restTicks);
         robot.moveRightFT(cmTicks * 10,0.5);
         robot.armUpFT(500, 0.5);
+
+        //robot moves into the cone stack and gets a cone
         robot.moveForwardFT(cmTicks * 67,0.4);
         sleep(restTicks);
-        robot.armDownFT(625, 0.5); //Goes in the cone
+        robot.armDownFT(680, 0.5); //Goes in the cone
         sleep(restTicks);
         robot.servoClose();
         sleep(restTicks);
-        robot.armUpFT(200,0.5);
-        robot.moveBackwardFT(cmTicks * 30,0.5);
-        robot.turnRightFT(degTicks * 2,0.5);
+        robot.armUpFT(680,0.5);
+
+        //robot moves to low junction and drops cone
+        robot.moveBackwardFT(cmTicks * 60,0.5);
+        robot.armLowTele();
+        robot.turnRightFT(degTicks,0.5);
         robot.armLow();
         sleep(restTicks);
         robot.moveForwardFT(cmTicks * 5,0.5);
-        robot.armLoad();
+        robot.servoOpen();
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 5,0.5);
 
 
-
-
-
-       /* robot.turnRightFT(degTicks * 7/2, 0.5);
+        //temp
+        robot.armPrimed();
+        robot.turnLeftFT(degTicks * 2, 0.5);
         sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 45, 0.2);
+        robot.moveForwardFT(cmTicks * 30, 0.5);
+        robot.armDownFT(725, 0.5); //Goes in the cone
         sleep(restTicks);
-        */
-        //robot.armLoad();
-        //sleep(restTicks);
-        /*
-        robot.moveBackwardFT(cmTicks * 72, 0.5);
+        robot.servoClose();
         sleep(restTicks);
-        robot.turnLeftFT(degTicks * 7/2, 0.5);
+        robot.armUpFT(200,0.5);
+        robot.moveBackwardFT(cmTicks * 60,0.5);
         sleep(restTicks);
-        robot.moveRightFT(cmTicks * 13,0.5);
+        robot.turnLeftFT(degTicks * 2, 0.5);
+        robot.armHighTele();
         sleep(restTicks);
+        robot.moveLeftFT(cmTicks * 30, 0.5);
         robot.armHigh();
-        sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 27, 0.5);
+        robot.moveForwardFT(cmTicks * 5, 0.5);
         sleep(restTicks);
         robot.servoOpen();
         sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 27, 0.5);
+        robot.moveBackwardFT(cmTicks * 5, 0.5);
         sleep(restTicks);
         robot.armPrimed();
-        sleep(restTicks);
+
         */
 
-        /*robot.turnLeftFT(degTicks * 7/2, 0.5);
-        sleep(restTicks);
-         */
 
-
-      /*  switch (originalDetected){
+        switch (originalDetected){
             case "Circle":
                 telemetry.addLine("Bolt running");
                 telemetry.update();
                 //Code here for circle movement
 
                 sleep(restTicks);
-                robot.moveLeftFT(cmTicks * 65, 0.5);
-                sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 55, 0.5);
+                robot.moveForwardFT(cmTicks * 60, 0.5);
+
 
 
 
@@ -150,8 +165,7 @@ public class BlueAuton extends LinearOpMode {
                 telemetry.addLine("Bulb running");
                 telemetry.update();
                 //Code here for triangle movement
-                sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 55, 0.5);
+                robot.moveLeftFT(cmTicks * 6, 0.5);
 
 
                 break;
@@ -161,9 +175,8 @@ public class BlueAuton extends LinearOpMode {
                 telemetry.update();
                 //Code here for square movement
                 sleep(restTicks);
-                robot.moveRightFT(cmTicks * 60, 0.5);
-                sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 55, 0.5);
+                robot.moveLeftFT(cmTicks * 5, 0.5);
+                robot.moveBackwardFT(cmTicks * 60, 0.5);
 
 
                 break;
@@ -171,61 +184,10 @@ public class BlueAuton extends LinearOpMode {
                 telemetry.addLine("No signal detected running");
                 telemetry.update();
                 sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 55, 0.5);
+                robot.moveForwardFT(cmTicks * 60, 0.5);
+
 
         }
-
-        sleep(1000); //Unecessary, can delete
-        //robot moves to high junction
-        
-        /*
-        for (int a = 0; a < 2; a++) {
-            
-            //MEDIUM JUNCTION SECTION
-
-                //robot moves to  cone
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-                sleep(restTicks);
-                robot.turnLeftFT(degTicks, 0.5);
-                sleep(restTicks);
-            
-                //claw close to grab cone
-                robot.servoClose();
-
-                //robot moves to medium junction
-                robot.turnLeftFT(degTicks * 3, 0.5);
-                sleep(restTicks);
-                robot.moveRightFT(cmTicks * 90, 0.5);
-            
-                //raises arm to medium junction height
-                robot.armUpFT(145, 0.5);
-
-                //claw open to release cone
-                robot.servoOpen();
-
-
-            //TALL JUNCTION SECTION
-                //robot moves to cone
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-                sleep(restTicks);
-                robot.turnRightFT(degTicks * 3, 0.5);
-                
-                //claw close to get cone 
-                robot.servoClose();
-           
-                //Robot moves to high junction
-                robot.turnRightFT(degTicks * 3, 0.5);
-                sleep(restTicks);
-                robot.moveLeftFT(cmTicks * 90, 0.5);
-
-                //arm goes to high junction height
-                robot.armUpFT(180, 0.5);
-                //claw open to deposit cone
-                robot.servoOpen();
-        }
-        */
-        
-        //Park wherever initially indicated by the signal sleeve
 
         //Inside of the while statement below is any code that you want to run in loop during autonomous.
         while (opModeIsActive() && runtime.milliseconds() < 30000) {
@@ -234,4 +196,3 @@ public class BlueAuton extends LinearOpMode {
     }
 }
 
-//e
