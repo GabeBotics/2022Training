@@ -17,6 +17,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Spark {
 
+    //Test
     public static final int PRIMED = 1000;
     public static final int LOW = 1500;
     public static final int MEDIUM = 3000;
