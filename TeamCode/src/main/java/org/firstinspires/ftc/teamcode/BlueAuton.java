@@ -62,6 +62,7 @@ public class BlueAuton extends LinearOpMode {
         robot.armLoad();
         sleep(restTicks);
         robot.armPrimed();
+        robot.moveLeftFT(cmTicks * 9/2, 0.25);
         robot.moveBackwardFT(cmTicks * 83,0.75);
         robot.moveForwardFT(cmTicks * 20,0.5);
 
