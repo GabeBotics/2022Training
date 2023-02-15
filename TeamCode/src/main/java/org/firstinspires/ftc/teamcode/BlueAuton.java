@@ -62,6 +62,7 @@ public class BlueAuton extends LinearOpMode {
         robot.armLoad();
         sleep(restTicks);
         robot.armPrimed();
+        robot.moveLeftFT(cmTicks * 5, 0.25);
         robot.moveBackwardFT(cmTicks * 83,0.75);
         robot.moveForwardFT(cmTicks * 20,0.5);
 
@@ -71,7 +72,6 @@ public class BlueAuton extends LinearOpMode {
         robot.armMedium();
         robot.moveForwardFT(cmTicks * 2394/100,0.5);
         robot.armUpFT(90, 0.5);
-        sleep(restTicks);
 
         //robot places a cone on a medium junction
         sleep(restTicks * 10);
