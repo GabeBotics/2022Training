@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //import javax.xml.catalog.GroupEntry.ResolveType;
 
 
-@Autonomous(name="BlueAuton2", group="Template")
+@Autonomous(name="RedAutonMid", group="Template")
 //@Disabled
 
-public class BlueAuton2 extends LinearOpMode {
+public class RedAutonMid extends LinearOpMode {
     private Spark robot;
     private Tracker tracker;
     private ElapsedTime runtime = new ElapsedTime();
@@ -59,14 +59,14 @@ public class BlueAuton2 extends LinearOpMode {
         robot.armSet();
         robot.moveBackwardFT(cmTicks * 5, 0.5);
         sleep(restTicks);
-        robot.moveRightFT(cmTicks * 48,0.5);
+        robot.moveLeftFT(cmTicks * 48,0.5);
         sleep(restTicks);
         robot.moveBackwardFT(cmTicks * 55, 0.5);
         sleep(restTicks);
-        robot.armHighTele();
+        robot.armMediumTele();
         robot.turnRightFT(degTicks * 3, 0.5);
         sleep(restTicks);
-        robot.armHigh();
+        robot.armMedium();
         sleep(restTicks);
         robot.moveForwardFT(cmTicks * 35, 0.5);
         sleep(restTicks);
@@ -81,12 +81,11 @@ public class BlueAuton2 extends LinearOpMode {
 
         switch (originalDetected){
             case "Circle":
-                telemetry.addLine("Bolt running");
+                telemetry.addLine("Panel running");
                 telemetry.update();
-                //Code here for circle movement
+                //Code here for square movement
                 sleep(restTicks);
-                //robot.moveForwardFT(cmTicks * 60, 0.5);
-                robot.turnLeftFT(degTicks * 2, 0.5);
+                robot.moveForwardFT(cmTicks * 105, 0.5);
 
                 break;
 
@@ -94,24 +93,26 @@ public class BlueAuton2 extends LinearOpMode {
                 telemetry.addLine("Bulb running");
                 telemetry.update();
                 //Code here for triangle movement
-                robot.moveBackwardFT(cmTicks * 51, 0.5);
+                robot.moveForwardFT(cmTicks * 55, 0.5);
 
                 break;
 
             case "Square":
-                telemetry.addLine("Panel running");
+                telemetry.addLine("Bolt running");
                 telemetry.update();
-                //Code here for square movement
+                //Code here for circle movement
                 sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 105, 0.5);
-
+                //robot.moveForwardFT(cmTicks * 60, 0.5);
+                robot.turnLeftFT(degTicks * 2, 0.5);
+                sleep(restTicks);
+                robot.moveBackwardFT(cmTicks * 3, 0.5);
                 break;
             default:
                 telemetry.addLine("No signal detected running");
                 telemetry.update();
                 sleep(restTicks);
                 //robot.moveForwardFT(cmTicks * 60, 0.5);
-                robot.turnLeftFT(degTicks * 2, 0.5);
+                robot.turnRightFT(degTicks * 2, 0.5);
 
 
         }

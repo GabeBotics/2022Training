@@ -1,24 +1,20 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-
 import static org.firstinspires.ftc.teamcode.Spark.Drivetrain.MECHANUM;
 
-import android.speech.RecognitionService;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 //import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 //import javax.swing.text.html.parser.ContentModel;
 //import javax.xml.catalog.GroupEntry.ResolveType;
 
 
-@Autonomous(name="RedAuton", group="Template")
+@Autonomous(name="RedAutonHigh", group="Template")
 //@Disabled
 
-public class RedAuton extends LinearOpMode {
+public class RedAutonHigh extends LinearOpMode {
     private Spark robot;
     private Tracker tracker;
     private ElapsedTime runtime = new ElapsedTime();
@@ -42,7 +38,7 @@ public class RedAuton extends LinearOpMode {
         int secondsToWaitForSignal = 5; //Note, the max in Tracker is 10 seconds.
 
         //robot code for bottom left and top right
-        //place the robot so that the camera is on the opposite side of the robot from the side closest to the
+        //place the robot so that the camera is on the opposite side of the robot from the side closest to the 
         //wall
 
         //PLACE IMAGE RECOGNITION CODE HERE
@@ -60,103 +56,38 @@ public class RedAuton extends LinearOpMode {
         //Code here to do cones
 
         robot.armLoad();
-        sleep(restTicks);
-        robot.armPrimed();
-        robot.moveBackwardFT(cmTicks * 83,0.75);
-        robot.moveForwardFT(cmTicks * 20,0.5);
-
-        //robot moves in position to place a cone
-        robot.armMediumTele();
-        robot.turnLeftFT(degTicks * 3,0.5);
-        robot.armMedium();
-        robot.moveForwardFT(cmTicks * 2394/100,0.5);
-        sleep(restTicks);
-        robot.armDownFT(200, 0.25);
-
-        //robot places a cone on a medium junction
-        robot.servoOpen();
-        sleep(restTicks);
-        robot.armUpFT(220, 0.5);
-        robot.moveBackwardFT(cmTicks * 25,0.5);
-        sleep(restTicks);
-
-        robot.turnRightFT(degTicks, 0.5);
-        sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 9/2, 0.5);
-
-        /*
-        sleep(restTicks);
-        robot.armPrimed();
-        robot.turnRightFT(degTicks * 31/10,0.5);
-        sleep(restTicks);
-
-        //robot moves in line with the cone stack
-        robot.moveLeftFT(cmTicks * 68,0.5);
-        sleep(restTicks);
-        robot.moveRightFT(cmTicks * 10,0.5);
-        robot.armUpFT(500, 0.5);
-
-        //robot moves into the cone stack and gets a cone
-        robot.moveForwardFT(cmTicks * 67,0.4);
-        sleep(restTicks);
-        robot.armDownFT(680, 0.5); //Goes in the cone
-        sleep(restTicks);
-        robot.servoClose();
-        sleep(restTicks);
-        robot.armUpFT(680,0.5);
-
-        //robot moves to low junction and drops cone
-        robot.moveBackwardFT(cmTicks * 60,0.5);
-        robot.armLowTele();
-        robot.turnRightFT(degTicks,0.5);
-        robot.armLow();
-        sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 5,0.5);
-        robot.servoOpen();
-        sleep(restTicks);
-        robot.moveBackwardFT(cmTicks * 5,0.5);
-
-
-        //temp
-        robot.armPrimed();
-        robot.turnLeftFT(degTicks * 2, 0.5);
-        sleep(restTicks);
-        robot.moveForwardFT(cmTicks * 30, 0.5);
-        robot.armDownFT(725, 0.5); //Goes in the cone
-        sleep(restTicks);
-        robot.servoClose();
-        sleep(restTicks);
-        robot.armUpFT(200,0.5);
-        robot.moveBackwardFT(cmTicks * 60,0.5);
-        sleep(restTicks);
-        robot.turnLeftFT(degTicks * 2, 0.5);
-        robot.armHighTele();
-        sleep(restTicks);
-        robot.moveLeftFT(cmTicks * 30, 0.5);
-        robot.armHigh();
-        robot.moveForwardFT(cmTicks * 5, 0.5);
-        sleep(restTicks);
-        robot.servoOpen();
-        sleep(restTicks);
+        robot.armSet();
         robot.moveBackwardFT(cmTicks * 5, 0.5);
         sleep(restTicks);
-        robot.armPrimed();
+        robot.moveLeftFT(cmTicks * 48,0.5);
+        sleep(restTicks);
+        robot.moveBackwardFT(cmTicks * 55, 0.5);
+        sleep(restTicks);
+        robot.armHighTele();
+        robot.turnLeftFT(degTicks * 3, 0.5);
+        sleep(restTicks);
+        robot.armHigh();
+        sleep(restTicks);
+        robot.moveForwardFT(cmTicks * 35, 0.5);
+        robot.armUpFT(90, 0.5);
+        sleep(restTicks * 10);
+        robot.servoOpen();
+        sleep(restTicks * 2);
+        robot.moveBackwardFT(cmTicks * 35, 0.5);
+        sleep(restTicks);
+        robot.turnRightFT(degTicks, 0.5);
+        sleep(restTicks);
 
-        */
-
+        //parking
 
         switch (originalDetected){
             case "Circle":
                 telemetry.addLine("Bolt running");
                 telemetry.update();
                 //Code here for circle movement
-
                 sleep(restTicks);
-                robot.moveBackwardFT(cmTicks * 61, 0.5);
-
-
-
-
+                //robot.moveForwardFT(cmTicks * 60, 0.5);
+                robot.turnRightFT(degTicks * 2, 0.5);
 
                 break;
 
@@ -164,8 +95,7 @@ public class RedAuton extends LinearOpMode {
                 telemetry.addLine("Bulb running");
                 telemetry.update();
                 //Code here for triangle movement
-                robot.moveRightFT(cmTicks * 6, 0.5);
-
+                robot.moveBackwardFT(cmTicks * 51, 0.5);
 
                 break;
 
@@ -174,17 +104,15 @@ public class RedAuton extends LinearOpMode {
                 telemetry.update();
                 //Code here for square movement
                 sleep(restTicks);
-                robot.moveRightFT(cmTicks * 5, 0.5);
-                robot.moveForwardFT(cmTicks * 60, 0.5);
-
+                robot.moveBackwardFT(cmTicks * 105, 0.5);
 
                 break;
             default:
                 telemetry.addLine("No signal detected running");
                 telemetry.update();
                 sleep(restTicks);
-                robot.moveForwardFT(cmTicks * 60, 0.5);
-
+                //robot.moveForwardFT(cmTicks * 60, 0.5);
+                robot.turnRightFT(degTicks * 2, 0.5);
 
 
         }
