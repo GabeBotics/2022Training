@@ -90,7 +90,7 @@ public class Tele extends OpMode {
             speedMod = 0.7;
 
             if (gamepad1.right_trigger > 0.3) {
-                speedMod = 1;
+                speedMod = 1.2;
             }
 
             robot.mechanumMovT(gamepad1.left_stick_x * speedMod, -gamepad1.left_stick_y * speedMod, gamepad1.right_stick_x * speedMod);
