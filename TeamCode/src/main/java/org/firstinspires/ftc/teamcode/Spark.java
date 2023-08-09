@@ -549,6 +549,18 @@ public class Spark {
         armStatus = Spark.ArmState.high;
     }
 
+    public void armSet() {
+        armMotor.setTargetPosition(PRIMED);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armUp(0.5);
+
+        waitForArm();
+
+        armStop();
+
+    }
+
     public boolean checkArm(){
 
         //Initial check to stop arm if too low
