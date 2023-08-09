@@ -121,7 +121,7 @@ public class Spark {
                 armTouch = hwMap.get(DigitalChannel.class, "armTouch");
                 armTouch.setMode(DigitalChannel.Mode.INPUT);
                 //Set directions to ensure that robot moves forward when
-                //all motor power is 1
+                //all motor power is 1 test
                 motor1.setDirection(DcMotor.Direction.REVERSE);
                 motor2.setDirection(DcMotor.Direction.FORWARD);
                 motor3.setDirection(DcMotor.Direction.REVERSE);
