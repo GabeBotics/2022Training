@@ -3,6 +3,8 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -218,7 +220,116 @@ public class Spark {
                 rightClawServo = hwMap.servo.get("rightClawServo");
                 allDriveMotors = new DcMotor[]{motor1, motor2, motor3, motor4};
                 suspensionMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+                break;
+
+            case TEST:
+
+                //setup for da motors
+                motor1 = hwMap.dcMotor.get("motor1");
+                motor2 = hwMap.dcMotor.get("motor2");
+                motor3 = hwMap.dcMotor.get("motor3");
+                motor4 = hwMap.dcMotor.get("motor4");
+
+                //reverse motors that need to spin the other direction
+                motor1.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+                imu = hwMap.get( IMU.class, "imu");
+
+                //parameters for imu
+                parameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.FORWARD, RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
+
+                imu.initialize( parameters );
+
+                webcamName = hwMap.get(WebcamName.class, "Webcam 1");
+                allDriveMotors = new DcMotor[]{motor1,motor2,motor3,motor4};
+
+                break;
+
+            default:
+
+                telem.addLine("Invalid type" + drive + "passed to Spark's init function. Nothing has been set up. ");
+
         }
+    }
+    //motor power for all drivetrains
+
+    public void rest() {
+        motor4.setPower(0);
+        motor3.setPower(0);
+        motor2.setPower(0);
+        motor1.setPower(0);
+    }
+
+    //function controls movement for the robot
+
+    public void move( double x, double y, double turn) {
+
+        switch (drive) {
+
+            case MECHANUM:
+
+                double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1);
+
+                double motor1 = ( y + x + turn) / denominator;
+                double motor2 = ( y + x + turn) / denominator;
+                double motor3 = ( y + x + turn) / denominator;
+                double motor4 = ( y + x + turn) / denominator;
+
+                motor1.setPower( "motor1Power");
+                motor2.setPower( "motor2Power");
+                motor3.setPower( "motor3Power");
+                motor4.setPower( "motor4Power");
+
+                 break;
+
+            case TEST:
+
+
+                denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1);
+
+                 motor1 = ( y + x + turn) / denominator;
+                 motor2 = ( y + x + turn) / denominator;
+                 motor3 = ( y + x + turn) / denominator;
+                 motor4 = ( y + x + turn) / denominator;
+
+                motor1.setPower( "motor1Power");
+                motor2.setPower( "motor2Power");
+                motor3.setPower( "motor3Power");
+                motor4.setPower( "motor4Power");
+
+                break;
+
+        }
+
+    }
+
+    public void moveLeft( double speed ) {
+        move( -speed, 0, 0);
+    }
+    public void moveRight(double speed) {
+        move( -speed, 0, 0);
+    }
+    public void moveBackward(double speed) {
+        move( 0, -speed, 0);
+    }
+    public void moveForward(double speed) {
+        move( 0, speed, 0);
+    }
+    public void turnLeft(double speed) {
+        move(0, -speed, 0);
+    }
+    public void turnRight(double speed){
+        move( 0, 0, speed);
+    }
+    public void resetYaw() {
+        imu.resetYaw();
+    }
+
+
+    public double getHeading() {
+        return imu.getRobotYawPitchRollAngles().getYaw( AngleUnit.DEGREES);
     }
 
 }
