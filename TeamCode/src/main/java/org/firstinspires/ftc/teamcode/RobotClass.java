@@ -328,4 +328,89 @@ public class Spark {
         return imu.getRobotYawPitchRollAngles().getYaw( AngleUnit.DEGREES);
     }
 
+
+    //sets arm power
+
+    public void liftArm() {
+        armMotor.setPower(0.75);
+    }
+
+    public void lowerArm() {
+        armMotor.setPower(-0.5);
+    }
+
+    public void setArmMotor( double power ) {
+        armMotor.setPower( power );
+    }
+
+    public void setDroneMotor( double power ) {
+        droneMotor.setPower( power );
+    }
+
+    public void launchDrone() {
+        droneMotor.setPower(-1);
+    }
+
+    public void setSuspensionMotor( double power ) {
+        suspensionMotor.setPower( power );
+    }
+
+    public void setIntakeMotor ( double power ) {
+        intakeMotor.setPower( power );
+    }
+
+    //set claw servo to position
+
+    public void setLeftClawServo( double position ) {
+        leftClawServo.setPosition( position );
+    }
+
+    public void setRightClawServo( double position ) {
+        rightClawServo.setPosition( position );
+    }
+
+    public void tiltClaw() {
+        angleServo.setPosition( 0.4 );
+    }
+
+    public void resetClaw() {
+        angleServo.setPosition( 0.46 );
+    }
+
+    public void openLeftClaw() {
+        leftClawServo.setPosition(1);
+    }
+
+    public void openRightClaw() {
+        rightClawServo.setPosition( 0.65 );
+    }
+
+    public void closeLeftClaw() {
+        leftClawServo.setPosition( 0.35 );
+    }
+
+    public void closeRightClaw() {
+        rightClawServo.setPosition( 0.1 );
+    }
+
+    public void setHookServo( double position ) {
+        hookServo.setPosition( position );
+    }
+
+    public void dropHook() {
+        setHookServo(HOOK_DROP_POSITION);
+    }
+
+    public void liftHook() {
+        setHookServo(HOOK_UP_POSITION);
+    }
+
+    public void pixelRelease( double power ) {
+        revolveServo.setPower( power );
+    }
+
+    public void turnRightDegrees( double degrees, double speed ) {
+
+    }
+
 }
