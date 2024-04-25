@@ -410,7 +410,40 @@ public class Spark {
     }
 
     public void turnRightDegrees( double degrees, double speed ) {
+        double target = getHeading() + degrees;
+
+        final double DEGREE_OF_ERROR = 0.5;
+
+        move(0, 0, speed);
+
+        while (auton.opModeIsActive() && !auton.isStopRequested() && (getHeading() >= target + DEGREE_OF_ERROR || getHeading() <= target + DEGREE_OF_ERROR)) {
+
+        }
+        rest();
 
     }
+
+        public void turnLeftDegrees( double degrees, double speed) {
+
+        turnRightDegrees( -degrees, -speed);
+
+        }
+
+        public void moveForwardInches( double inches, double speed) {
+
+        int tickTarget = (int)Math.round( inches * INCH_TICKS);
+
+        resetDriveEncoders();
+
+        for (Dcmotor x: allDriveMotors) {
+
+            x.setTargetPosition( tickTarget );
+            x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        }
+
+        }
+
+
 
 }
