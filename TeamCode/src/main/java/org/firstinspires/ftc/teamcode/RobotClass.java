@@ -428,8 +428,7 @@ public class Spark {
         turnRightDegrees( -degrees, -speed);
 
         }
-
-        public void moveForwardInches( double inches, double speed) {
+    public void moveForwardInches( double inches, double speed) {
 
         int tickTarget = (int)Math.round( inches * INCH_TICKS);
 
@@ -442,8 +441,71 @@ public class Spark {
 
         }
 
+        move( 0, speed, 0);
+
+        waitForMotors();
+
+        resetDriveEncoders();
+
+
+    }
+
+
+        public void moveBackwardInches( double inches, double speed ) {
+
+        moveForwardInches( -inches, -speed);
+
+
         }
 
 
+    public void moveRightInches( double inches, double speed ) {
 
+        int tickTarget = (int)Math.round( inches * INCH_TICKS);
+
+        resetDriveEncoders();
+
+        for (DcMotor x: allDriveMotors) {
+
+            x.setTargetPosition( tickTarget );
+            x.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        }
+
+        move(speed, 0, 0);
+
+        waitForMotors();
+
+    }
+
+    public void moveLeftInches(double inches,double speed) {
+
+        moveRightInches( -inches, -speed);
+
+    }
+
+    public void waitForMotors() {
+        boolean finished = false;
+        while (auton.opModeIsActive() && !finished && !auton.isStopRequested()) {
+            for (DcMotor x : allDriveMotors) {
+                if (x.getCurrentPosition() >= x.getTargetPosition() + 2 || x.getCurrentPosition() <= x.getTargetPosition() - 2) {
+                    telem.addData("Front Left Encoder:", motor1.getCurrentPosition());
+                    telem.addData("Front Right Encoder:", motor2.getCurrentPosition());
+                    telem.addData("Back Left Encoder:", motor3.getCurrentPosition());
+                    telem.addData("Back Right Encoder:", motor4.getCurrentPosition());
+                    telem.update();
+                } else {
+                    finished = true;
+                }
+            }
+        }
+    }
+
+    public void resetDriveEncoders() {
+        for (DcMotor x : allDriveMotors) {
+            x.setPower(0);
+            x.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            x.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
+    }
 }
